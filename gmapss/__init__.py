@@ -7,5 +7,5 @@ Version: Alpha
 '''
 #7/27/20
 
-name = "gmapss"
-from .gmapss import GoogleMapsSearch
+name = "gmapi"
+from .gmapi import GoogleMapsSearch

@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlparse, urlretrieve
 from urllib.parse import quote_plus, unquote_plus
 
+# make query_maps(query)
 # Put single result in list by default
 # Account for multiple results (just return titles, urls, coords & w/e else)
 # Index with "var a=document.body.offsetWidth,b=" for optimization
