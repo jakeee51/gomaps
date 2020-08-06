@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/jakeee51/gmapi",
     packages = setuptools.find_packages(),
-    py_modules = ["gmapi"],
+    py_modules = ["gmapss", "busytimes"],
     classifiers = [
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

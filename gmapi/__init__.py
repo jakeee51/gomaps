@@ -3,9 +3,9 @@
 Author: David J. Morfe
 Application Name: gmapss
 Functionality Purpose: Acquire google maps data to utilize for web scraping
-Version: Alpha
+Version: Beta
 '''
-#7/27/20
 
 name = "gmapi"
-from .gmapi import GoogleMapsSearch
+from .gmapss import GoogleMaps, GoogleMapsResults, maps_search
+from .busytimes import popular_times, query_link, append_df_to_xl
