@@ -14,10 +14,6 @@ from bs4 import BeautifulSoup
 from urllib.request import urlparse, urlretrieve
 from urllib.parse import quote_plus, unquote_plus
 
-# make query_maps(query)
-# Put single result in list by default
-# Account for multiple results (just return titles, urls, coords & w/e else)
-# Index with "var a=document.body.offsetWidth,b=" for optimization
 # Prep for package production
 # Optimize speed
 
@@ -30,7 +26,11 @@ class GoogleMaps:
    __sq = "https://www.google.com/search?q="
    __resp = None
 
-   def __init__(self, query: str):
+   def __init__(self, query: str, session=None):
+      if session != None:
+         self.__sesh = session
+      else:
+         self.__sesh = HTMLSession()
       self.oq = re.sub(self.__mq, '', query.replace('+', ' '))
       self.query = self.__mq + quote_plus(self.oq)
       self.__resp = requests.get(self.query)
@@ -62,16 +62,19 @@ class GoogleMaps:
                                 self.url).group().strip("/@")
          self.title = unquote_plus(title)
    def __set_attrs(self, query: str):
-      session = HTMLSession()
-      resp = session.get(self.__sq + quote_plus(query)); resp.html.render()
+      resp = self.__sesh.get(self.__sq + quote_plus(query)); resp.html.render()
       #self.title = resp.html.find("em", first=True).text
+##      for i in str(resp.html.html).split('\n'):
+##         if re.search(r"^var a=document\.body\.offsetWidth,b=", str(i)):
+##            resp = str(i)
+##            break
       try:
          address = re.search(r"Address</a>: </span>.+?</span>",
                              resp.html.html)
          self.address = re.sub(r"Address</a>: </span>.+?>", '',
                                address.group()).strip("</span>")
       except (TypeError, AttributeError):
-            pass
+         pass
       try:
          website = re.search(r"Web Result with Site Links.+?onmousedown",
                              resp.html.html)
@@ -116,7 +119,7 @@ class GoogleMaps:
          self.values["rating"] = self.rating
          self.values["open_hours"] = self.open_hours
 
-   def search(self):
+   def get_values(self):
       self.address = self.website = None; self.values = {}
       self.phone_number = self.rating = None; self.open_hours = {}
       self.__set_attrs(self.oq)
@@ -133,22 +136,25 @@ class GoogleMapsResults:
    __n_a = "There are no local results matching your search!"
    __results = []
 
-   def __init__(self, query: str, page_num=1, delay=3):
+   def __init__(self, query: str, page_num=1, delay=10, log=False):
       self.oq = re.sub(self.__sq, '', query.replace('+', ' '))
       self.query = self.__sq + quote_plus(self.oq)
-      self.__resp = GoogleMaps(self.oq); self.url = None
       self.__pn = page_num; self.delay = delay
+      self.__sesh = HTMLSession(); self.url = None
+      self.__resp = GoogleMaps(self.oq, self.__sesh)
       if self.__resp.url != None: # Check if query only yields single result
-         self.__results.append(self.__resp)
-      del(self.__resp);
-      self._place_names = self._get_place_names(self.oq) or [self.__n_a]
-      if self._place_names[0] != self.__n_a:
-         for name in self._place_names:
-            result = GoogleMaps(name)
-            time.sleep(self.delay)
-            self.__results.append(result)
+         self.__results.append(self.__resp); del(self.__resp)
       else:
-         self.__results = self._place_names
+         self._place_names = self._get_place_names(self.oq) or [self.__n_a]
+         if self._place_names[0] != self.__n_a:
+            for name in self._place_names:
+               result = GoogleMaps(name)
+               time.sleep(self.delay)
+               self.__results.append(result)
+               if log:
+                  print(result)
+         else:
+            self.__results = self._place_names
    def __repr__(self):
       return f"GoogleMapsResults({self.__results})"
    def __iter__(self):
@@ -157,9 +163,8 @@ class GoogleMapsResults:
       return self.__results[key]
 
    def _get_place_names(self, query: str) -> list:
-      q = self.__sq + quote_plus(query)
-      session = HTMLSession(); names = []
-      resp = session.get(q); resp.html.render()
+      q = self.__sq + quote_plus(query); names = []
+      resp = self.__sesh.get(q); resp.html.render()
       next_page = "&#rlfi=start:"; Q = quote_plus(query).replace('+','\+')
       href = re.search(fr"/search\?q={Q}&amp;npsic.+?\"",
                             resp.html.html)
@@ -172,7 +177,7 @@ class GoogleMapsResults:
       subs = '|'.join(query.split(' '))
       expr = fr"\\\\u0026q\\\\u003d[A-Z].*?(?:{subs})?.*?"\
              "\\\\u0026ludocid"
-      resp = session.get(list_link)
+      resp = self.__sesh.get(list_link)
       gathering = re.findall(expr, resp.html.html)
       for match in gathering:
          parsed = re.sub(r"(\\\\u0026q\\\\u003d|\\\\u0026ludocid)", '', match)
@@ -181,18 +186,27 @@ class GoogleMapsResults:
       if len(names) != 0:
          return names
 
-def maps_search(q: str, page_num: int, delay: int, single: bool):
+   def list(self) -> list:
+      return self.__results
+
+def maps_search(q: str, page_num: int=1, delay: int=10,
+                log: bool=False, single: bool=False,):
    if single:
       return GoogleMaps(q)
    if re.search(r"^.+\..+$", q) and ' ' not in q:
-      return GoogleMapsResults(q, page_num, delay)
-
-def main():
-   url = "Sopranos Pizza"
-   url = "Tops Diner"
-url = "Gyro Grill"
-resp = GoogleMapsResults(url, 2)
-print("\nOutput:", resp)
+      q = re.sub(r"(https?://)?www\.google\.com/(search|maps)\?q=",
+                 '', q)
+      q = unquote_plus(q)
+   if delay < 3:
+      delay = 3
+   return GoogleMapsResults(q, page_num, delay, log)
 
 if __name__ == "__main__":
-   main()
+   t0 = time.process_time()
+   result = maps_search("Tops Diner", single=True)
+   print(result.get_values())
+   t1 = time.process_time()
+   total = t1 - t0
+   print(f"Timestamp 1: {t0} secs\nTimestamp 2: {t1} secs")
+   print("Module Time Elapsed:", total, "seconds")
+# 0.046875 seconds, 0.015625 seconds
