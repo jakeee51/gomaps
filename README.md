@@ -5,7 +5,7 @@ Gmapi is an API for querying places on Google Maps and scraping the metadata of 
 |------------------------|------------------------------------------|
 | <ul><li>Place Name</li><li>Place Google Maps URL</li><li>Place Star Rating</li><li>Place Open Hours</li></ul>| <ul><li>Place Address</li><li>Place Coordinates (lattitude/longitude)</li><li>Place Website</li><li>Place Phone Number</li></ul> |
 
-There is also another module within this package that scrapes Google Maps Popular Times data!
+There is also another module within this package that scrapes Google Maps ___Popular Times___ data!
 
 <h2><b>Documentation:</b></h2>
 https://gmapi.readthedocs.io/en/latest/
