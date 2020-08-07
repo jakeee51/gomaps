@@ -1,4 +1,4 @@
-# The-gmapi-Python-Package (Google Maps API)
+# The-Gmapi-Python-Package (Google Maps API)
 This is an API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
 |                        |                                          |
 |------------------------|------------------------------------------|
