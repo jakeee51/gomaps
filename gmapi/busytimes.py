@@ -5,7 +5,7 @@ Application Name: busytimes
 Functionality Purpose: Web scrape Google Maps Popular Times data
 Version: Beta
 '''
-#8/6/20
+#8/7/20
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -14,6 +14,7 @@ from openpyxl import Workbook, load_workbook
 from datetime import datetime
 from urllib.request import urlopen, urlparse, urlretrieve
 from urllib.parse import quote_plus, unquote_plus
+from .gmapss import GoogleMaps
 import GeoLiberator as GL
 import re
 import pandas as pd
@@ -37,9 +38,9 @@ except ImportError:
 exceptions = ["""
     Your search - {} - did not match any Google Maps Sites.
     Suggestions:
+    • Addresses don't work, only place names.
     • Make sure all words are spelled correctly.
-    • Addresses don't work, only facility names.
-    • Try adding a city, state, or zip code."""]
+    • Try adding a city, state, or zip code to the place name."""]
 
 class LocationNotFoundError(Exception):
     pass
@@ -55,6 +56,14 @@ class BusyTimes:
     def __init__(self, location):
         self.location = str(location)
 
+    def __get_driver(self, driver_path: str):
+        if "phantomjs" in driver_path:
+            driver = webdriver.PhantomJS(executable_path=driver_path)
+        else:
+            chrome_options = Options()
+            chrome_options.add_argument('--headless')
+            driver = webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=chrome_options)
+        return driver
     def _put_time(self, val):
         current_hour = re.search(r"^\d+", str(datetime.now().time())).group()
         if int(current_hour) < 12:
@@ -66,7 +75,7 @@ class BusyTimes:
         else:
             return val
 
-    def _get_missing_times(self, lst):
+    def _get_missing_times(self, lst: list):
         def incrementTime(num, apm, bol=True):
             ret = 0
             if bol == True:
@@ -103,10 +112,8 @@ class BusyTimes:
                     break
         return (ret, pos)
 
-    def _scrape_times(self):
-        chrome_options = Options()
-        chrome_options.add_argument('--headless')
-        driver = webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=chrome_options)
+    def _scrape_times(self, driver_path: str, keep_driver_alive: bool=False) -> dict:
+        driver = self.__get_driver(driver_path)
         driver.implicitly_wait(30)
         check_link = re.search(r"www.google.com/maps(/|\?q=)", self.location)
         data = {}; c = 0
@@ -120,16 +127,12 @@ class BusyTimes:
                         driver.implicitly_wait(30)
                         break
         else: #Get location's google maps link
-            url = query_link(self.location)
+            url = get_query_link(self.location)
             if url == '':
                 driver.quit()
                 raise LocationNotFoundError(exceptions[0].format(self.location))
-            driver.get(url); curl = driver.current_url
-            while True:
-                if curl != driver.current_url:
-                    driver.get(driver.current_url)
-                    driver.implicitly_wait(30)
-                    break
+            nurl = GoogleMaps(url).url
+            driver.get(nurl)
         soup = BeautifulSoup(driver.page_source, 'lxml')
         for item in soup.find_all("div", "section-bad-query-title"):
             if re.search(r"Maps can't find", str(item)):
@@ -142,12 +145,26 @@ class BusyTimes:
             hour_items = [self._put_time(i.get_attribute("aria-label")) for i in day_items if i.get_attribute("aria-label") != None]
             data[days[c]] = hour_items
             c += 1
-
-        driver.quit()
+        if not keep_driver_alive:
+            driver.quit()
         return data
 
-def popular_times(location, file=''):
-    result = BusyTimes(location)._scrape_times()
+def _convert_to_24_hour(times):
+    return times #return new list as 24 hour time format
+
+def _populate24Hours(times):
+    all_hours = [f"0% busy at {i}" for i in range(24)]
+    for i, v in enumerate(times):
+        if v == "% busy at .":
+            times = all_hours
+        else:
+            times[i] = times[i]
+    return times #return new list with 24 hours per day AM/PM
+
+def popular_times(location: str, driver, file: str='', keep_driver_alive: bool=False) -> dict:
+    if keep_driver_alive:
+        print("Warning: Web Driver terminal window will have to be closed manually!")
+    result = BusyTimes(location)._scrape_times(driver, keep_driver_alive)
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     for day in result:
         result[day] = _populate24Hours(result[day])
@@ -177,7 +194,6 @@ def popular_times(location, file=''):
                 else:
                     val = "Closed"
                     tim = "N/A"
-##                timestamp = days[datetime.now().weekday()] ADD DATES FOR THE WEEK
                 df = df.append({"Place Name": location, "Day of Week": k, "Hour of Day": tim, "Popular Time Value": val}, ignore_index=True)
         if ".xls" in file:
             append_df_to_xl(file, df)
@@ -188,27 +204,14 @@ def popular_times(location, file=''):
         else:
             raise Exception("File type not supported")
 
-def _convert_to_24_hour(times):
-    pass
-    return times #return new list as 24 hour time format
-
-def _populate24Hours(times):
-    all_hours = [f"0% busy at {i}" for i in range(24)]
-    for i, v in enumerate(times):
-        if v == "% busy at .":
-            times = all_hours
-        else:
-            times[i] = times[i]
-    return times #return new list with 24 hours per day AM/PM
-
-def query_link(place):
+def get_query_link(place: str) -> str:
     link = '';
-    if GL.GeoLiberator(place).getAddress() == "OTHER":
+    if GL.parse_address(place, "address") == "OTHER":
         place = quote_plus(place)
         link = "https://www.google.com/maps?q=" + place
     return link
 
-def append_df_to_xl(file_name, data):
+def append_df_to_xl(file_name: str, data):
     writer = pd.ExcelWriter(file_name, engine="openpyxl", mode='a')
     book = load_workbook(file_name)
     writer.book = book

@@ -9,7 +9,7 @@ setuptools.setup(
     author = "David J. Morfe",
     author_email = "jakemorfe@gmail.com",
     license = "MIT",
-    description = "A module that queries google maps & returns the website data",
+    description = "A package that queries google maps & scrapes its data",
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/jakeee51/gmapi",

@@ -5,7 +5,7 @@ Application Name: gmapss
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/6/20
+#8/7/20
 
 import requests, time, os, sys, re
 import pyppdf.patch_pyppeteer

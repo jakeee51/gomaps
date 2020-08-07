@@ -8,4 +8,4 @@ Version: Beta
 
 name = "gmapi"
 from .gmapss import GoogleMaps, GoogleMapsResults, maps_search
-from .busytimes import popular_times, query_link, append_df_to_xl
+from .busytimes import popular_times, get_query_link, append_df_to_xl
