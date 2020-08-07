@@ -3,9 +3,9 @@ import gmapi, time
 if __name__ == "__main__":
    t0 = time.process_time()
 
-##   print(gmapi.popular_times("Star Diner, White Plains, NY", "chromedriver.exe"))
-##   result = gmapi.maps_search("Tops Diner")
-##   print(result)
+   print(gmapi.popular_times("Tops Diner", "chromedriver.exe"))
+   result = gmapi.maps_search("Tops Diner")
+   print(result[0].get_values())
 
    t1 = time.process_time()
    total = t1 - t0
