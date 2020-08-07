@@ -1,6 +1,8 @@
-# gmapss (google-maps-search)
-An API for querying locations on google maps and returning the results of that search. Results are comprised of meta data associated with the query.
+# gmapi (Google Maps API)
+This Python package is an API for querying places on google maps and returning the results of that search. Results of a query include the following:
+* Place Name\t\t* Place Phone Number
+* Place Google Maps URL\t\t* Place Star Rating
+* Place Address\t\t* Place Open Hours
+* Place Coordinates (lattitude/longitude)
 
-gmapss
-gmapi
-google-maps-api
+<h2><b>Usage:</b></h2>
