@@ -60,11 +60,6 @@ class GoogleMaps:
          self.title = unquote_plus(title)
    def __set_attrs(self, query: str):
       resp = self.__sesh.get(self.__sq + quote_plus(query)); resp.html.render()
-##      self.title = resp.html.find("em", first=True).text
-##      for i in str(resp.html.html).split('\n'):
-##         if re.search(r"^var a=document\.body\.offsetWidth,b=", str(i)):
-##            resp = str(i)
-##            break
       try:
          address = re.search(r"Address</a>: </span>.+?</span>",
                              resp.html.html)

@@ -7,13 +7,18 @@ Gmapi is an API for querying places on Google Maps and scraping the metadata of 
 
 There is also another module within this package that scrapes Google Maps Popular Times data!
 
-<h2><b>Usage:</b></h2>
+<h2><b>Documentation:</b></h2>
+<a href="https://gmapi.readthedocs.io/en/latest/"></a>>
+
+<h2><b>Quickstart:</b></h2>
 
 To start, import the functions from the `gmapi` package.
 ```python
 from gmapi import maps_search
 
 result = maps_search("Tops Diner") # Returns a list of GoogleMaps objects
+# GoogleMapsResults([<gmapi.GoogleMaps object; Place-Name: Tops Diner>])
+
 result[0].get_values() # Populates the object's attributes & returns a dictionary
 '''
 {
@@ -27,9 +32,15 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
   'open_hours': {'Currently': 'Closed - Opens 8AM', 'Hours': {'Friday': '8AM–11PM', 'Saturday': '8AM–11PM', 'Sunday': '8AM–11PM', 'Monday': '8AM–11PM', 'Tuesday': '8AM–11PM', 'Wednesday': '8AM–11PM', 'Thursday': '8AM–11PM'}}
 }
 '''
+
 from gmapi import popular_times
-result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section below
+
+result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section below regarding the 'chromedriver.exe' argument
+'''
+{'Tuesday': ['0% busy at 6 AM.', '0% busy at 7 AM.', '20% busy at 8 AM.', '34% busy at 9 AM.', '49% busy at 10 AM.', '59% busy at 11 AM.', '62% busy at 12 PM.', '56% busy at 1 PM.', '47% busy at 2 PM.', '41% busy at 3 PM.', '45% busy at 4 PM.', '57% busy at 5 PM.', '70% busy at 6 PM.', '74% busy at 7 PM.', '66% busy at 8 PM.', '47% busy at 9 PM.', '27% busy at 10 PM.', '0% busy at 11 PM.'], ... }
+'''
 ```
+
 
 **Drivers:**
 
