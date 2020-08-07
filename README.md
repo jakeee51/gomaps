@@ -17,14 +17,14 @@ result = maps_search("Tops Diner") # Returns a list of GoogleMaps objects
 result[0].get_values() # Populates the object's attributes & returns a dictionary
 '''
 {
-	'title': 'Tops Diner',
-	'url': 'https://www.google.com/maps/place/Tops+Diner/@40.7506065,-74.1639023,17z/data=!4m2!3m1!1s0x89c2547b4ec3235b:0x7342f11f69197f92!8m2!3d40.7506065!4d-74.1639023',
-	'address': '500 Passaic Ave, East Newark, NJ 07029',
-	'coords': ('40.7506065', '-74.1639023'),
-	'website': 'https://www.thetopsdiner.com/',
-	'phone_number': '(973) 481-0490',
-	'rating': '4.6',
-	'open_hours': {'Currently': 'Closed - Opens 8AM', 'Hours': {'Friday': '8AM–11PM', 'Saturday': '8AM–11PM', 'Sunday': '8AM–11PM', 'Monday': '8AM–11PM', 'Tuesday': '8AM–11PM', 'Wednesday': '8AM–11PM', 'Thursday': '8AM–11PM'}}
+  'title': 'Tops Diner',
+  'url': 'https://www.google.com/maps/place/Tops+Diner/@40.7506065,-74.1639023,17z/data=!4m2!3m1!1s0x89c2547b4ec3235b:0x7342f11f69197f92!8m2!3d40.7506065!4d-74.1639023',
+  'address': '500 Passaic Ave, East Newark, NJ 07029',
+  'coords': ('40.7506065', '-74.1639023'),
+  'website': 'https://www.thetopsdiner.com/',
+  'phone_number': '(973) 481-0490',
+  'rating': '4.6',
+  'open_hours': {'Currently': 'Closed - Opens 8AM', 'Hours': {'Friday': '8AM–11PM', 'Saturday': '8AM–11PM', 'Sunday': '8AM–11PM', 'Monday': '8AM–11PM', 'Tuesday': '8AM–11PM', 'Wednesday': '8AM–11PM', 'Thursday': '8AM–11PM'}}
 }
 '''
 from gmapi import popular_times
