@@ -12,7 +12,7 @@ https://gomaps.readthedocs.io/en/latest/
 
 <h2><b>Quickstart:</b></h2>
 
-To start, import the functions from the `gmapi` package.
+To start, import the functions from the `gomaps` package.
 ```python
 from gomaps import maps_search
 
