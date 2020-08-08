@@ -4,7 +4,7 @@ with open("README.md", 'r') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name = "gmapi",
+    name = "gomaps",
     version = "0.1.0",
     author = "David J. Morfe",
     author_email = "jakemorfe@gmail.com",

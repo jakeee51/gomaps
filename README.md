@@ -1,6 +1,6 @@
-# The-Gmapi-Python-Package (Google Maps API)
+# The-Gomaps-Python-Package
 
-Gmapi is an API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
+Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
 |                        |                                          |
 |------------------------|------------------------------------------|
 | <ul><li>Place Name</li><li>Place Google Maps URL</li><li>Place Star Rating</li><li>Place Open Hours</li></ul>| <ul><li>Place Address</li><li>Place Coordinates (lattitude/longitude)</li><li>Place Website</li><li>Place Phone Number</li></ul> |
@@ -8,13 +8,13 @@ Gmapi is an API for querying places on Google Maps and scraping the metadata of 
 There is also another module within this package that scrapes Google Maps ___Popular Times___ data!
 
 <h2><b>Documentation:</b></h2>
-https://gmapi.readthedocs.io/en/latest/
+https://gomaps.readthedocs.io/en/latest/
 
 <h2><b>Quickstart:</b></h2>
 
 To start, import the functions from the `gmapi` package.
 ```python
-from gmapi import maps_search
+from gomaps import maps_search
 
 result = maps_search("Tops Diner") # Returns a list of GoogleMaps objects
 # GoogleMapsResults([<gmapi.GoogleMaps object; Place-Name: Tops Diner>])
@@ -36,7 +36,7 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
 }
 '''
 
-from gmapi import popular_times
+from gomaps import popular_times
 
 result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section below regarding the 'chromedriver.exe' argument
 '''
