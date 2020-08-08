@@ -17,7 +17,7 @@ To start, import the functions from the `gomaps` package.
 from gomaps import maps_search
 
 result = maps_search("Tops Diner") # Returns a list of GoogleMaps objects
-# GoogleMapsResults([<gmapi.GoogleMaps object; Place-Name: Tops Diner>])
+# GoogleMapsResults([<gomaps.GoogleMaps object; Place-Name: Tops Diner>])
 
 result[0].get_values() # Populates the object's attributes & returns a dictionary
 '''

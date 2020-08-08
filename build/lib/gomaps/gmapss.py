@@ -5,7 +5,7 @@ Application Name: gmapss
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/8/20
+#8/7/20
 
 import requests, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -38,8 +38,8 @@ class GoogleMaps:
       self.__set_url(url_components); del(self.__resp)
    def __repr__(self):
       if self.url == None:
-         return f"<gomaps.GoogleMaps object; Place Not Found>"
-      return f"<gomaps.GoogleMaps object; Place-Name: {self.title}>"
+         return f"<gmapi.GoogleMaps object; Place Not Found>"
+      return f"<gmapi.GoogleMaps object; Place-Name: {self.title}>"
    def __iter__(self):
       return iter(self.values)
    def __getitem__(self, key):

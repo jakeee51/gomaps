@@ -1,0 +1,86 @@
+Metadata-Version: 2.1
+Name: gomaps
+Version: 0.1.0
+Summary: A package that queries google maps & scrapes its data
+Home-page: https://github.com/jakeee51/gmapi
+Author: David J. Morfe
+Author-email: jakemorfe@gmail.com
+License: MIT
+Description: # The-Gomaps-Python-Package
+        
+        Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
+        |                        |                                          |
+        |------------------------|------------------------------------------|
+        | <ul><li>Place Name</li><li>Place Google Maps URL</li><li>Place Star Rating</li><li>Place Open Hours</li></ul>| <ul><li>Place Address</li><li>Place Coordinates (lattitude/longitude)</li><li>Place Website</li><li>Place Phone Number</li></ul> |
+        
+        There is also another module within this package that scrapes Google Maps ___Popular Times___ data!
+        
+        <h2><b>Documentation:</b></h2>
+        https://gomaps.readthedocs.io/en/latest/
+        
+        <h2><b>Quickstart:</b></h2>
+        
+        To start, import the functions from the `gomaps` package.
+        ```python
+        from gomaps import maps_search
+        
+        result = maps_search("Tops Diner") # Returns a list of GoogleMaps objects
+        # GoogleMapsResults([<gmapi.GoogleMaps object; Place-Name: Tops Diner>])
+        
+        result[0].get_values() # Populates the object's attributes & returns a dictionary
+        '''
+        {
+          'title': 'Tops Diner',
+          'url': 'https://www.google.com/maps/place/Tops+Diner/@40.7506065,-74.1639023,17z/data=!4m2!3m1!1s0x89c2547b4ec3235b:0x7342f11f69197f92!8m2!3d40.7506065!4d-74.1639023',
+          'address': '500 Passaic Ave, East Newark, NJ 07029',
+          'coords': ('40.7506065', '-74.1639023'),
+          'website': 'https://www.thetopsdiner.com/',
+          'phone_number': '(973) 481-0490',
+          'rating': '4.6',
+          'open_hours': {'Currently': 'Closed - Opens 8AM',
+                         'Hours': {'Friday': '8AMâ€“11PM', 'Saturday': '8AMâ€“11PM', 'Sunday': '8AMâ€“11PM',
+                                   'Monday': '8AMâ€“11PM', 'Tuesday': '8AMâ€“11PM', 'Wednesday': '8AMâ€“11PM', 'Thursday': '8AMâ€“11PM'}
+                        }
+        }
+        '''
+        
+        from gomaps import popular_times
+        
+        result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section below regarding the 'chromedriver.exe' argument
+        '''
+        {
+          'Sunday': ['0% busy at 6 AM.', '0% busy at 7 AM.', '20% busy at 8 AM.', '34% busy at 9 AM.', '49% busy at 10 AM.',
+                     '59% busy at 11 AM.', '62% busy at 12 PM.', '56% busy at 1 PM.', '47% busy at 2 PM.', '41% busy at 3 PM.',
+                     '45% busy at 4 PM.', '57% busy at 5 PM.', '70% busy at 6 PM.', '74% busy at 7 PM.', '66% busy at 8 PM.',
+                     '47% busy at 9 PM.', '27% busy at 10 PM.', '0% busy at 11 PM.'],
+          'Monday': ...
+        }
+        '''
+        ```
+        
+        
+        **Drivers:**
+        
+        Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure itâ€™s in your PATH, e. g., place it in /usr/bin or /usr/local/bin.
+        
+        Failure to observe this step will give you an error selenium.common.exceptions.WebDriverException: Message: â€˜geckodriverâ€™ executable needs to be in PATH.
+        
+        Other supported browsers will have their own drivers available. Links to some of the more popular browser drivers follow. *(Note: PhantomJS is another alternative)*
+        
+        |          |                                                                       |
+        |----------|-----------------------------------------------------------------------|
+        | Chrome:  | https://sites.google.com/a/chromium.org/chromedriver/downloads        |
+        | Edge:    | https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ |
+        | Firefox: | https://github.com/mozilla/geckodriver/releases                       |
+        | Safari:  | https://webkit.org/blog/6900/webdriver-support-in-safari-10/          |
+        
+        *source: https://pypi.org/project/selenium/*
+        
+        # Copyright
+        Copyright (c) 2020 The Python Packaging Authority. Released under the MIT License.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
