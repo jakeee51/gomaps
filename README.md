@@ -1,11 +1,17 @@
 # The-Gomaps-Python-Package
 
 Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
-|                        |                                          |
-|------------------------|------------------------------------------|
-| * Place Name * Place Google Maps URL * Place Star Rating * Place Open Hours | * Place Address * Place Coordinates (lattitude/longitude) * Place Website * Place Phone Number |
 
-There is also another module within this package that scrapes Google Maps ___Popular Times___ data!
+* Place Name
+* Place Google Maps URL
+* Place Address
+* Place Coordinates (lattitude/longitude)
+* Place Website
+* Place Phone Number
+* Place Star Rating
+* Place Open Hours
+
+There is also another module within this package that scrapes Google Maps __Popular Times__ data!
 
 <h2><b>Documentation:</b></h2>
 <a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/</a>
