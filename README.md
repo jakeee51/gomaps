@@ -1,3 +1,7 @@
+<a href="https://pypi.org/project/gomaps">
+  <img src="https://img.shields.io/pypi/v/gomaps.svg" alt="latest release" />
+</a>
+
 # The-Gomaps-Python-Package
 
 Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
@@ -8,7 +12,7 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 * Place Coordinates (lattitude/longitude)
 * Place Website
 * Place Phone Number
-* Place Star Rating ★★★★★
+* Place Star Rating
 * Place Open Hours
 
 There is also another feature within this package that scrapes Google Maps __Popular Times__ data!

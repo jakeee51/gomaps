@@ -51,8 +51,12 @@ The function ``maps_search()`` is returning a GoogleMapsResults object that cont
    }
    '''
 
-Notice we index *result* with zero (``result[0]``), in order to reference the first GoogleMaps object. From there one is able to call the ``get_values()`` member function of the GoogleMaps object.
+Notice we index *result* with zero (``result[0]``), in order to reference the first GoogleMaps object. From there, one is able to call the ``get_values()`` member function of the GoogleMaps object.
+
 Reason why I have a seprate function to get the rest of the attributes is for speed optimization. Upon initialization, a GoogleMaps object only has the place's *url*, *coordinates*, and *title* attributes.
+
+
+To be able to utilize the ``popular_times()`` function, you'll need to download a web driver. Simply put, a web driver is a tool to automate web application testing acting as a sort of *mock* web browser. With that said, web drivers are not meant for web scraping. However, it is necessary to execute the javascript rendering the HTML that holds the data we seek.
 
 .. code-block:: python
 
