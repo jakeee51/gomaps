@@ -4,17 +4,12 @@
    contain the root `toctree` directive.
 
 Welcome to the Gomaps documentation!
-==================================
+====================================
+
+Gomaps, is a Google Maps API that web scrapes data of places based on a query string.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   quickstart
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

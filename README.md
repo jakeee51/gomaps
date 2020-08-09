@@ -8,10 +8,10 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 * Place Coordinates (lattitude/longitude)
 * Place Website
 * Place Phone Number
-* Place Star Rating
+* Place Star Rating ★★★★★
 * Place Open Hours
 
-There is also another module within this package that scrapes Google Maps __Popular Times__ data!
+There is also another feature within this package that scrapes Google Maps __Popular Times__ data!
 
 <h2><b>Documentation:</b></h2>
 <a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/</a>

@@ -1,10 +1,10 @@
-import gmapi, time
+import gomaps, time
 
 if __name__ == "__main__":
    t0 = time.process_time()
 
-##   print(gmapi.popular_times("Tops Diner", "chromedriver.exe"))
-   result = gmapi.maps_search("Tops Diner")
+##   print(gomaps.popular_times("Tops Diner", "chromedriver.exe"))
+   result = gomaps.maps_search("Gyro Grill", log=True)
    print(result)
 
    t1 = time.process_time()

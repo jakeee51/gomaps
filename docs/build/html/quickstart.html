@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickStart Guide &#8212; gomaps 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to the Gomaps documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="quickstart-guide">
+<h1>QuickStart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this headline">¶</a></h1>
+<p>Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:</p>
+<ul class="simple">
+<li><p>Place Name</p></li>
+<li><p>Place Google Maps URL</p></li>
+<li><p>Place Address</p></li>
+<li><p>Place Coordinates (lattitude/longitude)</p></li>
+<li><p>Place Website</p></li>
+<li><p>Place Phone Number</p></li>
+<li><p>Place Star Rating (★★★★★)</p></li>
+<li><p>Place Open Hours</p></li>
+</ul>
+<p>There is also another feature within this package that scrapes Google Maps <strong>Popular Times</strong> data!</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install gomaps
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To start, import the functions from the <cite>gomaps</cite> package.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">gomaps</span> <span class="k">import</span> <span class="n">maps_search</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">maps_search</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">)</span> <span class="c1"># Returns a list like object</span>
+<span class="go">GoogleMapsResults([&lt;gomaps.GoogleMaps object; Place-Name: Tops Diner&gt;])</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">maps_search()</span></code> is returning a GoogleMapsResults object that contains all the places that were found in the scrape. <em>In this case</em> only one place was found since the inquiry for “Tops Diner” was specific enough to have only <strong>one</strong> result.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span> <span class="c1"># Populates the object&#39;s attributes &amp; returns a dictionary</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">{</span>
+<span class="sd">  &#39;title&#39;: &#39;Tops Diner&#39;,</span>
+<span class="sd">  &#39;url&#39;: &#39;https://www.google.com/maps/place/Tops+Diner/@40.7506065,-74.1639023,17z/data=!4m2!3m1!1s0x89c2547b4ec3235b:0x7342f11f69197f92!8m2!3d40.7506065!4d-74.1639023&#39;,</span>
+<span class="sd">  &#39;address&#39;: &#39;500 Passaic Ave, East Newark, NJ 07029&#39;,</span>
+<span class="sd">  &#39;coords&#39;: (&#39;40.7506065&#39;, &#39;-74.1639023&#39;),</span>
+<span class="sd">  &#39;website&#39;: &#39;https://www.thetopsdiner.com/&#39;,</span>
+<span class="sd">  &#39;phone_number&#39;: &#39;(973) 481-0490&#39;,</span>
+<span class="sd">  &#39;rating&#39;: &#39;4.6&#39;,</span>
+<span class="sd">  &#39;open_hours&#39;: {&#39;Currently&#39;: &#39;Closed - Opens 8AM&#39;,</span>
+<span class="sd">                 &#39;Hours&#39;: {&#39;Friday&#39;: &#39;8AM–11PM&#39;, &#39;Saturday&#39;: &#39;8AM–11PM&#39;, &#39;Sunday&#39;: &#39;8AM–11PM&#39;,</span>
+<span class="sd">                           &#39;Monday&#39;: &#39;8AM–11PM&#39;, &#39;Tuesday&#39;: &#39;8AM–11PM&#39;, &#39;Wednesday&#39;: &#39;8AM–11PM&#39;, &#39;Thursday&#39;: &#39;8AM–11PM&#39;}</span>
+<span class="sd">                }</span>
+<span class="sd">}</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>Notice we index <em>result</em> with zero (<code class="docutils literal notranslate"><span class="pre">result[0]</span></code>), in order to reference the first GoogleMaps object. From there one is able to call the <code class="docutils literal notranslate"><span class="pre">get_values()</span></code> member function of the GoogleMaps object.
+Reason why I have a seprate function to get the rest of the attributes is for speed optimization. Upon initialization, a GoogleMaps object only has the place’s <em>url</em>, <em>coordinates</em>, and <em>title</em> attributes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gomaps</span> <span class="kn">import</span> <span class="n">popular_times</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">popular_times</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">,</span> <span class="s2">&quot;chromedriver.exe&quot;</span><span class="p">)</span> <span class="c1"># See &#39;Drivers&#39; section below regarding the &#39;chromedriver.exe&#39; argument</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">{</span>
+<span class="sd">  &#39;Sunday&#39;: [&#39;0% busy at 6 AM.&#39;, &#39;0% busy at 7 AM.&#39;, &#39;20% busy at 8 AM.&#39;, &#39;34% busy at 9 AM.&#39;, &#39;49% busy at 10 AM.&#39;,</span>
+<span class="sd">             &#39;59% busy at 11 AM.&#39;, &#39;62% busy at 12 PM.&#39;, &#39;56% busy at 1 PM.&#39;, &#39;47% busy at 2 PM.&#39;, &#39;41% busy at 3 PM.&#39;,</span>
+<span class="sd">             &#39;45% busy at 4 PM.&#39;, &#39;57% busy at 5 PM.&#39;, &#39;70% busy at 6 PM.&#39;, &#39;74% busy at 7 PM.&#39;, &#39;66% busy at 8 PM.&#39;,</span>
+<span class="sd">             &#39;47% busy at 9 PM.&#39;, &#39;27% busy at 10 PM.&#39;, &#39;0% busy at 11 PM.&#39;],</span>
+<span class="sd">  &#39;Monday&#39;: ...</span>
+<span class="sd">}</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drivers">
+<h2>Drivers<a class="headerlink" href="#drivers" title="Permalink to this headline">¶</a></h2>
+<p>Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure it’s in your PATH, e. g., place it in /usr/bin or /usr/local/bin.</p>
+<p>Failure to observe this step will give you an error selenium.common.exceptions.WebDriverException: Message: ‘geckodriver’ executable needs to be in PATH.</p>
+<p>Other supported browsers will have their own drivers available. Links to some of the more popular browser drivers follow. <em>(Note: PhantomJS is another alternative)</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Chrome:</p></td>
+<td><p><a class="reference external" href="https://sites.google.com/a/chromium.org/chromedriver/downloads">https://sites.google.com/a/chromium.org/chromedriver/downloads</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Edge:</p></td>
+<td><p><a class="reference external" href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Firefox:</p></td>
+<td><p><a class="reference external" href="https://github.com/mozilla/geckodriver/releases">https://github.com/mozilla/geckodriver/releases</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Safari:</p></td>
+<td><p><a class="reference external" href="https://webkit.org/blog/6900/webdriver-support-in-safari-10/">https://webkit.org/blog/6900/webdriver-support-in-safari-10/</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">gomaps</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuickStart Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#drivers">Drivers</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to the Gomaps documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, David J. Morfe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/quickstart.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
