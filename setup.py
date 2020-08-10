@@ -5,11 +5,11 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "gomaps",
-    version = "0.1.1",
+    version = "0.1.2",
     author = "David J. Morfe",
     author_email = "jakemorfe@gmail.com",
     license = "MIT",
-    description = "A package that queries google maps & scrapes its data",
+    description = "A Google Maps search API for web scraping place data",
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/jakeee51/gmapi",

@@ -18,10 +18,9 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 There is also another feature within this package that scrapes Google Maps __Popular Times__ data!
 
 <h2><b>Documentation:</b></h2>
-<a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/</a>
+<a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/en/latest/</a>
 
 <h2><b>Quickstart:</b></h2>
-
 To start, import the functions from the `gomaps` package.
 ```python
 from gomaps import maps_search
@@ -60,9 +59,7 @@ result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section
 '''
 ```
 
-
-**Drivers:**
-
+<h2><b>Drivers:</b></h2>
 Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure it's in your PATH, e. g., place it in /usr/bin or /usr/local/bin.
 
 Failure to observe this step will give you an error selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.

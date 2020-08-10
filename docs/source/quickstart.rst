@@ -1,5 +1,5 @@
-QuickStart Guide
-================
+**QuickStart**
+====================
 
 Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
 
@@ -24,13 +24,16 @@ Installation
 Usage
 -----
 
-To start, import the functions from the `gomaps` package.
+There are two main functions to this Python package. To start, import the functions from the `gomaps` package.
+
+:py:func:`~gomaps.maps_search`
+++++++++++++++++++++++++++++++
 
 >>> from gomaps import maps_search
 >>> result = maps_search("Tops Diner") # Returns a list like object
-GoogleMapsResults([<gomaps.GoogleMaps object; Place-Name: Tops Diner>])
+GoogleMapsResults([<gomaps.*GoogleMaps* object; Place-Name: Tops Diner>])
 
-The function ``maps_search()`` is returning a GoogleMapsResults object that contains all the places that were found in the scrape. *In this case* only one place was found since the inquiry for "Tops Diner" was specific enough to have only **one** result.
+The function ``maps_search()`` is returning a :py:class:`~gomaps.GoogleMapsResults` object that contains all the places that were found in the scrape. *In this case* only one place was found since the inquiry for "Tops Diner" was specific enough to have only **one** result.
 
 .. code-block:: python
 
@@ -51,18 +54,24 @@ The function ``maps_search()`` is returning a GoogleMapsResults object that cont
    }
    '''
 
-Notice we index *result* with zero (``result[0]``), in order to reference the first GoogleMaps object. From there, one is able to call the ``get_values()`` member function of the GoogleMaps object.
+Notice we index *result* with zero (``result[0]``), in order to reference the first :py:class:`~gomaps.GoogleMaps` object of the container. From there, one is able to call the :py:meth:`~gomaps.GoogleMaps.get_values` member function of the :py:class:`~gomaps.GoogleMaps` object.
 
-Reason why I have a seprate function to get the rest of the attributes is for speed optimization. Upon initialization, a GoogleMaps object only has the place's *url*, *coordinates*, and *title* attributes.
+Reason why I have a separate function to get the rest of the attributes is for speed optimization. Upon initialization, a :py:class:`~gomaps.GoogleMaps` object only has the place's *url*, *coordinates*, and *title* attributes.
 
+:py:func:`~gomaps.popular_times`
+++++++++++++++++++++++++++++++++
 
-To be able to utilize the ``popular_times()`` function, you'll need to download a web driver. Simply put, a web driver is a tool to automate web application testing acting as a sort of *mock* web browser. With that said, web drivers are not meant for web scraping. However, it is necessary to execute the javascript rendering the HTML that holds the data we seek.
+To be able to utilize the ``popular_times()`` function, you'll need to download a :ref:`web driver <drivers>`. Afterwards, put the path to the web driver as the second argument of the function.
+
+.. admonition:: About Web Drivers
+
+   Simply put, a :ref:`web driver <drivers>` is a tool to automate web application testing acting as a sort of *mock* web browser. With that said, web drivers are not meant for web scraping. However, this API requires it to execute the Javascript rendering the HTML that holds the data we seek.
 
 .. code-block:: python
 
    from gomaps import popular_times
 
-   result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section below regarding the 'chromedriver.exe' argument
+   result = popular_times("Tops Diner", "chromedriver.exe") # Returns a dictionary
    '''
    {
      'Sunday': ['0% busy at 6 AM.', '0% busy at 7 AM.', '20% busy at 8 AM.', '34% busy at 9 AM.', '49% busy at 10 AM.',
@@ -72,6 +81,10 @@ To be able to utilize the ``popular_times()`` function, you'll need to download 
      'Monday': ...
    }
    '''
+
+As you can see above, your standard Python dictionary object is returned. With days of the week as keys and the values being a list of times with the percentage of how busy that place is at said time. For more information about Google's popular times data, refer to this support post: https://support.google.com/business/answer/6263531?hl=en.
+
+.. _drivers:
 
 Drivers
 -------

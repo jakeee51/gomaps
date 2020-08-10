@@ -15,9 +15,17 @@ from urllib.parse import quote_plus, unquote_plus
 # Optimize speed
 
 class GoogleMaps:
-   '''
+   '''A response object from a Google Maps request
+
    This class is initialized with a search string (query) and returns
-   the result of the query. It also resolves the new url.
+   the result of the query. It also resolves the new redirected Google Maps URL.
+
+   :param query: A search string that's assigned to the '?q=' URL argument.
+   :param session: An HTMLSession object from the requests_html Python package.
+   :type query: str
+   :type session: requests_html.HTMLSession
+
+   :returns: A single GoogleMaps object already containing the queried place's url, title, and lat/long coordinates
    '''
    __mq = "https://www.google.com/maps?q="
    __sq = "https://www.google.com/search?q="
@@ -119,9 +127,21 @@ class GoogleMaps:
       return self.values
 
 class GoogleMapsResults:
-   '''
+   '''A response object containing GoogleMaps objects as a result of the request
+
    This class is initialized with a search string (query) and returns
-   the result(s) within a list.
+   the result(s) within a list-like object.
+
+   :param query: A search string that's assigned to the '?q=' URL argument.
+   :param page_num: The number refering to the page of the results to be web scraped.
+   :param delay: An integer specifying the time in seconds to wait after each request.
+   :param log: If True, prints the places' GoogleMaps object as they're discovered.
+   :type query: str
+   :type page_num: int
+   :type delay: int
+   :type log: bool
+
+   :returns: A list-like object containing GoogleMaps objects as a result of the query.
    '''
    __mq = "https://www.google.com/maps?q="
    __sq = "https://www.google.com/search?q="
@@ -194,7 +214,19 @@ def __keyboardInterruptHandler(signal, frame):
 signal.signal(signal.SIGINT, __keyboardInterruptHandler)
 
 def maps_search(q: str, page_num: int=1, delay: int=10,
-                log: bool=False, single: bool=False,): # Returns list unless single is True
+                log: bool=False, single: bool=False): # Returns list unless single is True
+   '''Searches for a place(s) on Google Maps & returns the results
+
+   :param q: The query string used to search Google Maps.
+   :param page_num: The number refering to the page of the results to be web scraped.
+   :param delay: The number specifying the time in seconds to wait after each request.
+   :param log: If True, prints the found results as they occur.
+   :param single: If True, only returns the single GoogleMaps object directly.
+
+   .. warning:: delay cannot be less than 3 seconds, otherwise bot will be detected and blocked for too many requests
+
+   :returns: Returns a GoogleMapsResults object containing GoogleMaps objects from the search
+   '''
    if single:
       return GoogleMaps(q)
    if re.search(r"^.+\..+$", q) and ' ' not in q:

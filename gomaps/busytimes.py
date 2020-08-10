@@ -162,6 +162,19 @@ def _populate24Hours(times):
     return times #return new list with 24 hours per day AM/PM
 
 def popular_times(location: str, driver, file: str='', keep_driver_alive: bool=False) -> dict:
+    '''This function searches for a location or place on Google Maps, and returns its popular times data.
+
+    :param location: The name of a place used to search on Google Maps
+    :param driver: The path to the web driver being utilized
+    :param file: The file to write the popular times data to
+    :param keep_driver_alive: If True, keeps driver application open so it doesn't have to close and reopen again in loop.
+    :type location: str
+    :type driver: str
+    :type file: str
+    :type keep_driver_alive: bool
+
+    :returns: A dictionary of the popular times data with the days of the week as keys and the values being a list of times with the percentage of how busy that place is at said time.
+    '''
     if keep_driver_alive:
         print("Warning: Web Driver terminal window will have to be closed manually!")
     result = BusyTimes(location)._scrape_times(driver, keep_driver_alive)
@@ -205,6 +218,13 @@ def popular_times(location: str, driver, file: str='', keep_driver_alive: bool=F
             raise Exception("File type not supported")
 
 def get_query_link(place: str) -> str:
+    '''This function returns a new link to query Google Maps
+
+    :param place: Name of a place to be queried on Google Maps
+    :type place: str
+
+    :returns: The Google Maps URL to be send a request to
+    '''
     link = '';
     if GL.parse_address(place, "address") == "OTHER":
         place = quote_plus(place)
@@ -212,6 +232,13 @@ def get_query_link(place: str) -> str:
     return link
 
 def append_df_to_xl(file_name: str, data):
+    '''This function appends data to an Excel file
+
+    :param file_name: Excel file name to write to
+    :param data: Python Pandas DataFrame
+    :type file_name: str
+    :type data: pandas.DataFrame
+    '''
     writer = pd.ExcelWriter(file_name, engine="openpyxl", mode='a')
     book = load_workbook(file_name)
     writer.book = book

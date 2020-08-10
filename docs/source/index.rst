@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the Gomaps documentation!
-====================================
+**Welcome to the Gomaps documentation!**
+========================================
 
 Gomaps, is a Google Maps API that web scrapes data of places based on a query string.
 
@@ -12,4 +12,4 @@ Gomaps, is a Google Maps API that web scrapes data of places based on a query st
    :maxdepth: 2
 
    quickstart
-
+   documentation
