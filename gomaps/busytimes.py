@@ -5,7 +5,7 @@ Application Name: busytimes
 Functionality Purpose: Web scrape Google Maps Popular Times data
 Version: Beta
 '''
-#8/7/20
+#8/10/20
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
