@@ -104,7 +104,7 @@ GoogleMapsResults class
 Main Functions
 --------------
 
-.. autofunction:: gomaps.maps_search
+.. py:function:: gomaps.maps_search(q: str, page_num=1, delay=10, log=False, single=False)
 
    Searches for a place(s) on Google Maps & returns the results
 
@@ -129,7 +129,7 @@ Main Functions
 	         '4.6'
 
 
-.. autofunction:: gomaps.popular_times
+.. py:function:: gomaps.popular_times(location: str, driver, file='', keep_driver_alive=False)
 
    This function searches for a location or place on Google Maps, and returns its popular times data.
 
@@ -147,7 +147,7 @@ Main Functions
    :example: ``gomaps.popular_times("Tops Diner", "chromedriver.exe")``
 
 
-.. autofunction:: gomaps.get_query_link
+.. py:function:: gomaps.get_query_link(place: str) -> str
 
    This function returns a new link to query Google Maps
 
@@ -160,7 +160,7 @@ Main Functions
              "https://www.google.com/maps?q=Tops+Diner"
 
 
-.. autofunction:: gomaps.append_df_to_xl
+.. py:function:: gomaps.append_df_to_xl(file_name: str, data)
 
    This function appends data to an Excel file
 
