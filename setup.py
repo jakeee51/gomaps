@@ -13,6 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/jakeee51/gmapi",
+    install_requires = ["requests_html", "selenium", "bs4"],
     packages = setuptools.find_packages(),
     py_modules = ["gmapss", "busytimes"],
     classifiers = [
