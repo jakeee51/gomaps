@@ -5,7 +5,7 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "gomaps",
-    version = "0.1.5",
+    version = "0.1.6",
     author = "David J. Morfe",
     author_email = "jakemorfe@gmail.com",
     license = "MIT",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/jakeee51/gmapi",
-    install_requires = ["requests_html", "selenium", "bs4"
+    install_requires = ["requests_html", "selenium", "beautifulsoup4",
                         "GeoLiberator", "openpyxl", "pyppdf"],
     packages = setuptools.find_packages(),
     py_modules = ["gmapss", "busytimes"],
