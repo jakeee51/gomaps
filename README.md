@@ -4,7 +4,7 @@
 
 # The-Gomaps-Python-Package
 
-Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
+Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search (No API key needed). Results of a query include the following:
 
 * Place Name
 * Place Google Maps URL
