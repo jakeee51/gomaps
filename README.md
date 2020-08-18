@@ -24,7 +24,7 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 * Place Open Hours
 * Place Popular Times
 
-This can also scrape Google Maps __Popular Times__ data!
+That's right! This can also scrape Google Maps __Popular Times__ data!
 
 <h2><b>Documentation:</b></h2>
 <a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/en/latest/</a>
@@ -61,9 +61,10 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
 ```
 
 <h2><b>Patch Notes:</b></h2><i>
-* **0.2.0**
-- popular_times attribute now appended to `maps_search()` result!
-- busytimes module along with popular_times() function will be deprecated
+* <b>0.2.0</b>b>
+  - popular_times attribute now appended to `maps_search()` result!
+
+  - busytimes module along with popular_times() function will be deprecated
 </i>
 
 # Copyright

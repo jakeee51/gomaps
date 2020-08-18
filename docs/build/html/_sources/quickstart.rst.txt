@@ -65,9 +65,8 @@ Reason why I have a separate function to get the rest of the attributes is for s
 :py:func:`~gomaps.popular_times`
 ++++++++++++++++++++++++++++++++
  
-..warning::  Note
-   
-   Test
+..warning::
+   Note! This particular function and its module *busytimes.py* will be deprecated in the future!
 
 To be able to utilize the ``popular_times()`` function, you'll need to download a :ref:`web driver <drivers>`. Afterwards, put the path to the web driver as the second argument of the function.
 
