@@ -62,6 +62,7 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
 
 <h2><b>Patch Notes:</b></h2>
 <b>0.2.0</b>
+  
   - *popular_times attribute now appended to `maps_search()` result!*
 
   - *busytimes module along with popular_times() function will be deprecated*
