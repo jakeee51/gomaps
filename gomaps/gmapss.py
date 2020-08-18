@@ -5,7 +5,7 @@ Application Name: gmapss
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/10/20
+#8/17/20
 
 import requests, signal, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -96,7 +96,8 @@ class GoogleMaps:
          hours = re.search(r"Hours</a>: </span>.+?</table>", resp.html.html)
          current = re.search(r"(Opens|Close[sd])( soon)?</b>...((Opens|Closes) \d{1,2}(AM|PM))",
                              resp.html.html)
-         self.open_hours["Currently"] = f"{current.group(1)} - {current.group(3)}"
+         if current:
+            self.open_hours["Currently"] = f"{current.group(1)} - {current.group(3)}"
          self.__set_hours(hours.group())
       except (TypeError, AttributeError):
          pass
