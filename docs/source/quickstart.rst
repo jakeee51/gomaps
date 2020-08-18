@@ -32,14 +32,14 @@ There are two main functions to this Python package. To start, import the functi
 ++++++++++++++++++++++++++++++
 
 >>> from gomaps import maps_search
->>> result = maps_search("Tops Diner") # Returns a list like object
+>>> results = maps_search("Tops Diner") # Returns a list like object
 GoogleMapsResults([<gomaps.*GoogleMaps* object; Place-Name: Tops Diner>])
 
 The function ``maps_search()`` is returning a :py:class:`~gomaps.GoogleMapsResults` object that contains all the places that were found in the scrape. *In this case* only one place was found since the inquiry for "Tops Diner" was specific enough to have only **one** result.
 
 .. code-block:: python
 
-   result[0].get_values() # Populates the object's attributes & returns a dictionary
+   results[0].get_values() # Populates the object's attributes & returns a dictionary
    '''
    {
      'title': 'Tops Diner',
@@ -63,7 +63,7 @@ The function ``maps_search()`` is returning a :py:class:`~gomaps.GoogleMapsResul
    }
    '''
 
-Notice we index *result* with zero (``result[0]``), in order to reference the first :py:class:`~gomaps.GoogleMaps` object of the container. From there, one is able to call the :py:meth:`~gomaps.GoogleMaps.get_values` member function of the :py:class:`~gomaps.GoogleMaps` object.
+Notice we index *results* with zero (``results[0]``), in order to reference the first :py:class:`~gomaps.GoogleMaps` object of the container. From there, one is able to call the :py:meth:`~gomaps.GoogleMaps.get_values` member function of the :py:class:`~gomaps.GoogleMaps` object.
 
 Reason why I have a separate function to get the rest of the attributes is for speed optimization. Upon initialization, a :py:class:`~gomaps.GoogleMaps` object only has the place's *url*, *coordinates*, and *title* attributes.
 
