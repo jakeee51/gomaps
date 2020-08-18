@@ -45,8 +45,10 @@
 <li><p>Place Phone Number</p></li>
 <li><p>Place Star Rating (★★★★★)</p></li>
 <li><p>Place Open Hours</p></li>
+<li><p>Place Popular Times</p></li>
 </ul>
-<p>There is also another feature within this package that scrapes Google Maps <strong>Popular Times</strong> data!</p>
+<p>That’s right! This can also scrape Google Maps <strong>Popular Times</strong> data!
+For more information about Google’s popular times data, refer to this support post: <a class="reference external" href="https://support.google.com/business/answer/6263531?hl=en">https://support.google.com/business/answer/6263531?hl=en</a>.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install gomaps
@@ -79,7 +81,10 @@
 <span class="sd">                           &#39;Monday&#39;: &#39;8AM–11PM&#39;, &#39;Tuesday&#39;: &#39;8AM–11PM&#39;, &#39;Wednesday&#39;: &#39;8AM–11PM&#39;, &#39;Thursday&#39;: &#39;8AM–11PM&#39;}</span>
 <span class="sd">                }</span>
 <span class="sd">  &#39;popular_times&#39;: {</span>
-<span class="sd">                    &#39;Sunday&#39;: [&#39;0% busy at 6 AM&#39;, &#39;0% busy at 7 AM&#39;, &#39;19% busy at 8 AM&#39;, &#39;35% busy at 9 AM&#39;, &#39;48% busy at 10 AM&#39;, &#39;52% busy at 11 AM&#39;, &#39;49% busy at 12 PM&#39;, &#39;44% busy at 1 PM&#39;, &#39;45% busy at 2 PM&#39;, &#39;49% busy at 3 PM&#39;, &#39;52% busy at 4 PM&#39;, &#39;52% busy at 5 PM&#39;, &#39;57% busy at 6 PM&#39;, &#39;70% busy at 7 PM&#39;, &#39;78% busy at 8 PM&#39;, &#39;66% busy at 9 PM&#39;, &#39;39% busy at 10 PM&#39;, &#39;0% busy at 11 PM&#39;],</span>
+<span class="sd">                    &#39;Sunday&#39;: [&#39;0% busy at 6 AM&#39;, &#39;0% busy at 7 AM&#39;, &#39;19% busy at 8 AM&#39;, &#39;35% busy at 9 AM&#39;, &#39;48% busy at 10 AM&#39;,</span>
+<span class="sd">                    &#39;52% busy at 11 AM&#39;, &#39;49% busy at 12 PM&#39;, &#39;44% busy at 1 PM&#39;, &#39;45% busy at 2 PM&#39;, &#39;49% busy at 3 PM&#39;,</span>
+<span class="sd">                    &#39;52% busy at 4 PM&#39;, &#39;52% busy at 5 PM&#39;, &#39;57% busy at 6 PM&#39;, &#39;70% busy at 7 PM&#39;, &#39;78% busy at 8 PM&#39;,</span>
+<span class="sd">                    &#39;66% busy at 9 PM&#39;, &#39;39% busy at 10 PM&#39;, &#39;0% busy at 11 PM&#39;],</span>
 <span class="sd">                    &#39;Monday&#39;:  ...</span>
 <span class="sd">                    }</span>
 <span class="sd">}</span>
@@ -93,7 +98,7 @@
 <h3><a class="reference internal" href="documentation.html#gomaps.popular_times" title="gomaps.popular_times"><code class="xref py py-func docutils literal notranslate"><span class="pre">popular_times()</span></code></a><a class="headerlink" href="#popular-times" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Please note! This particular function and its module <em>busytimes.py</em> will be deprecated in the future!</p>
+<p>Please note! This particular function and its module <strong>busytimes</strong> will be deprecated!</p>
 </div>
 <p>To be able to utilize the <code class="docutils literal notranslate"><span class="pre">popular_times()</span></code> function, you’ll need to download a <a class="reference internal" href="#drivers"><span class="std std-ref">web driver</span></a>. Afterwards, put the path to the web driver as the second argument of the function.</p>
 <div class="admonition-about-web-drivers admonition">

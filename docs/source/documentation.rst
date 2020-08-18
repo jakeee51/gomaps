@@ -56,7 +56,7 @@ GoogleMaps class
       The open hours of operation of the place. Returns a dictionary.
    .. py:attribute:: popular_times
 
-      The busy times. Returns a dictionary.
+      The Google Maps `Popular Times <https://support.google.com/business/answer/6263531?hl=en>`_ data for 7 days of the week. Returns a dictionary.
    .. py:attribute:: values
 
       Returns a dictionary with all the attributes of the place listed above. (Note: Only populated after ``get_values()`` member function is called)
@@ -131,7 +131,7 @@ Main Functions
 	         >>> place.rating
 	         '4.6'
 
-.. warning:: Please note! The functions below and its module ***busytimes*** will be deprecated!
+.. warning:: Please note! The functions below and its module **busytimes** will be deprecated!
 
 .. py:function:: gomaps.popular_times(location: str, driver, file='', keep_driver_alive=False)
 
