@@ -66,9 +66,9 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
 <h2><b>Patch Notes:</b></h2>
 <i><b>0.2.0</b>
   
-  - A popular_times attribute is now appended to the GoogleMaps object! This optimizes speed, efficiency and convenience.
+  - A **popular_times** attribute is now appended to the GoogleMaps object! This optimizes speed, efficiency and convenience.
 
-  - The ***busytimes*** module along with popular_times() function will be deprecated.
+  - The ***busytimes*** module along with `popular_times()` function will be deprecated.
   
   - Less dependencies required (including selenium).
 </i>
