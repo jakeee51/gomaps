@@ -94,59 +94,6 @@ For more information about Google’s popular times data, refer to this support 
 <p>Notice we index <em>results</em> with zero (<code class="docutils literal notranslate"><span class="pre">results[0]</span></code>), in order to reference the first <a class="reference internal" href="documentation.html#gomaps.GoogleMaps" title="gomaps.GoogleMaps"><code class="xref py py-class docutils literal notranslate"><span class="pre">GoogleMaps</span></code></a> object of the container. From there, one is able to call the <a class="reference internal" href="documentation.html#gomaps.GoogleMaps.get_values" title="gomaps.GoogleMaps.get_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_values()</span></code></a> member function of the <a class="reference internal" href="documentation.html#gomaps.GoogleMaps" title="gomaps.GoogleMaps"><code class="xref py py-class docutils literal notranslate"><span class="pre">GoogleMaps</span></code></a> object.</p>
 <p>Reason why I have a separate function to get the rest of the attributes is for speed optimization. Upon initialization, a <a class="reference internal" href="documentation.html#gomaps.GoogleMaps" title="gomaps.GoogleMaps"><code class="xref py py-class docutils literal notranslate"><span class="pre">GoogleMaps</span></code></a> object only has the place’s <em>url</em>, <em>coordinates</em>, and <em>title</em> attributes.</p>
 </div>
-<div class="section" id="popular-times">
-<h3><a class="reference internal" href="documentation.html#gomaps.popular_times" title="gomaps.popular_times"><code class="xref py py-func docutils literal notranslate"><span class="pre">popular_times()</span></code></a><a class="headerlink" href="#popular-times" title="Permalink to this headline">¶</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Please note! This particular function and its module <strong>busytimes</strong> will be deprecated!</p>
-</div>
-<p>To be able to utilize the <code class="docutils literal notranslate"><span class="pre">popular_times()</span></code> function, you’ll need to download a <a class="reference internal" href="#drivers"><span class="std std-ref">web driver</span></a>. Afterwards, put the path to the web driver as the second argument of the function.</p>
-<div class="admonition-about-web-drivers admonition">
-<p class="admonition-title">About Web Drivers</p>
-<p>Simply put, a <a class="reference internal" href="#drivers"><span class="std std-ref">web driver</span></a> is a tool to automate web application testing acting as a sort of <em>mock</em> web browser. With that said, web drivers are not meant for web scraping. However, this API requires it to execute the Javascript rendering the HTML that holds the data we seek.</p>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gomaps</span> <span class="kn">import</span> <span class="n">popular_times</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">popular_times</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">,</span> <span class="s2">&quot;chromedriver.exe&quot;</span><span class="p">)</span> <span class="c1"># Returns a dictionary</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">{</span>
-<span class="sd">  &#39;Sunday&#39;: [&#39;0% busy at 6 AM.&#39;, &#39;0% busy at 7 AM.&#39;, &#39;20% busy at 8 AM.&#39;, &#39;34% busy at 9 AM.&#39;, &#39;49% busy at 10 AM.&#39;,</span>
-<span class="sd">             &#39;59% busy at 11 AM.&#39;, &#39;62% busy at 12 PM.&#39;, &#39;56% busy at 1 PM.&#39;, &#39;47% busy at 2 PM.&#39;, &#39;41% busy at 3 PM.&#39;,</span>
-<span class="sd">             &#39;45% busy at 4 PM.&#39;, &#39;57% busy at 5 PM.&#39;, &#39;70% busy at 6 PM.&#39;, &#39;74% busy at 7 PM.&#39;, &#39;66% busy at 8 PM.&#39;,</span>
-<span class="sd">             &#39;47% busy at 9 PM.&#39;, &#39;27% busy at 10 PM.&#39;, &#39;0% busy at 11 PM.&#39;],</span>
-<span class="sd">  &#39;Monday&#39;: ...</span>
-<span class="sd">}</span>
-<span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
-<p>As you can see above, your standard Python dictionary object is returned. With days of the week as keys and the values being a list of times with the percentage of how busy that place is at said time. For more information about Google’s popular times data, refer to this support post: <a class="reference external" href="https://support.google.com/business/answer/6263531?hl=en">https://support.google.com/business/answer/6263531?hl=en</a>.</p>
-</div>
-</div>
-<div class="section" id="drivers">
-<span id="id1"></span><h2>Drivers<a class="headerlink" href="#drivers" title="Permalink to this headline">¶</a></h2>
-<p>Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure it’s in your PATH, e. g., place it in /usr/bin or /usr/local/bin.</p>
-<p>Failure to observe this step will give you an error selenium.common.exceptions.WebDriverException: Message: ‘geckodriver’ executable needs to be in PATH.</p>
-<p>Other supported browsers will have their own drivers available. Links to some of the more popular browser drivers follow. <em>(Note: PhantomJS is another alternative)</em></p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p>Chrome:</p></td>
-<td><p><a class="reference external" href="https://sites.google.com/a/chromium.org/chromedriver/downloads">https://sites.google.com/a/chromium.org/chromedriver/downloads</a></p></td>
-</tr>
-<tr class="row-even"><td><p>Edge:</p></td>
-<td><p><a class="reference external" href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>Firefox:</p></td>
-<td><p><a class="reference external" href="https://github.com/mozilla/geckodriver/releases">https://github.com/mozilla/geckodriver/releases</a></p></td>
-</tr>
-<tr class="row-even"><td><p>Safari:</p></td>
-<td><p><a class="reference external" href="https://webkit.org/blog/6900/webdriver-support-in-safari-10/">https://webkit.org/blog/6900/webdriver-support-in-safari-10/</a></p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 
@@ -171,7 +118,6 @@ For more information about Google’s popular times data, refer to this support 
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>QuickStart</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#drivers">Drivers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html"><strong>API Documentation</strong></a></li>

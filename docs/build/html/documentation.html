@@ -233,66 +233,6 @@ the result(s) within a list-like object.</p>
 </dl>
 </dd></dl>
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Please note! The functions below and its module <strong>busytimes</strong> will be deprecated!</p>
-</div>
-<dl class="py function">
-<dt id="gomaps.popular_times">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">popular_times</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">location</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">driver</span></em>, <em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">keep_driver_alive</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.popular_times" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function searches for a location or place on Google Maps, and returns its popular times data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>location</strong> (<em>str</em>) – The name of a place used to search on Google Maps</p></li>
-<li><p><strong>driver</strong> (<em>str</em>) – The path to the web driver being utilized</p></li>
-<li><p><strong>file</strong> (<em>str</em>) – The file to write the popular times data to</p></li>
-<li><p><strong>keep_driver_alive</strong> (<em>bool</em>) – If True, keeps driver application open so it doesn’t have to close and reopen again in loop.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A dictionary of the popular times data with the days of the week as keys and the values being a list of times with the percentage of how busy that place is at said time.</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">gomaps.popular_times(&quot;Tops</span> <span class="pre">Diner&quot;,</span> <span class="pre">&quot;chromedriver.exe&quot;)</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="gomaps.get_query_link">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_query_link</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">place</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#gomaps.get_query_link" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function returns a new link to query Google Maps</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>place</strong> (<em>str</em>) – Name of a place to be queried on Google Maps</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The Google Maps URL to be send a request to</p>
-</dd>
-<dt class="field-odd">Example</dt>
-<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_query_link</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">)</span>
-<span class="go">&quot;https://www.google.com/maps?q=Tops+Diner&quot;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="gomaps.append_df_to_xl">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">append_df_to_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.append_df_to_xl" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function appends data to an Excel file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_name</strong> (<em>str</em>) – Excel file name to write to</p></li>
-<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – Python Pandas DataFrame</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 </div>
 
