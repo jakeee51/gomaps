@@ -54,6 +54,9 @@ GoogleMaps class
    .. py:attribute:: open_hours
 
       The open hours of operation of the place. Returns a dictionary.
+   .. py:attribute:: popular_times
+
+      The open hours of operation of the place. Returns a dictionary.
    .. py:attribute:: values
 
       Returns a dictionary with all the attributes of the place listed above. (Note: Only populated after ``get_values()`` member function is called)
@@ -91,7 +94,7 @@ GoogleMapsResults class
       The URL string that a request was sent to. (example: ``'https://www.google.com/search?q=Tops+Diner'``)
    .. py:attribute:: url
 
-      The newly redirected URL of the place on Google Maps *(available upon initialization)*
+      The newly redirected URL of the place on Google Maps *(available upon initialization as long as there's only a single result)*
    .. py:attribute:: delay
 
       The number specifying the time in seconds to wait after each request.
@@ -128,6 +131,7 @@ Main Functions
 	         >>> place.rating
 	         '4.6'
 
+.. warning:: Please note! The functions below and its module *busytimes.py* will be deprecated in the future!
 
 .. py:function:: gomaps.popular_times(location: str, driver, file='', keep_driver_alive=False)
 

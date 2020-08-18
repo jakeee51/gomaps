@@ -6,7 +6,6 @@
 **Welcome to the Gomaps documentation!**
 ========================================
 
-
 .. image:: https://img.shields.io/pypi/v/gomaps.svg
    :target: https://pypi.org/project/gomaps
    :alt: latest release

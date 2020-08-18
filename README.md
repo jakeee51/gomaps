@@ -25,6 +25,7 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 * Place Popular Times
 
 That's right! This can also scrape Google Maps __Popular Times__ data!
+For more information about Google's popular times data, refer to this support post: https://support.google.com/business/answer/6263531?hl=en.
 
 <h2><b>Documentation:</b></h2>
 <a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/en/latest/</a>

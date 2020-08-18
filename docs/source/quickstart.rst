@@ -11,8 +11,10 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 * Place Phone Number
 * Place Star Rating (★★★★★)
 * Place Open Hours
+* Place Popular Times
 
-There is also another feature within this package that scrapes Google Maps **Popular Times** data!
+That's right! This can also scrape Google Maps Popular Times data!
+For more information about Google's popular times data, refer to this support post: https://support.google.com/business/answer/6263531?hl=en.
 
 Installation
 ------------
@@ -65,8 +67,7 @@ Reason why I have a separate function to get the rest of the attributes is for s
 :py:func:`~gomaps.popular_times`
 ++++++++++++++++++++++++++++++++
  
-..warning::
-   Note! This particular function and its module *busytimes.py* will be deprecated in the future!
+.. warning:: Please note! This particular function and its module ***busytimes*** will be deprecated!
 
 To be able to utilize the ``popular_times()`` function, you'll need to download a :ref:`web driver <drivers>`. Afterwards, put the path to the web driver as the second argument of the function.
 
