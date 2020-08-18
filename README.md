@@ -60,12 +60,11 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
 '''
 ```
 
-<h2><b>Patch Notes:</b></h2><i>
-* <b>0.2.0</b>b>
-  - popular_times attribute now appended to `maps_search()` result!
+<h2><b>Patch Notes:</b></h2>
+<b>0.2.0</b>
+  - *popular_times attribute now appended to `maps_search()` result!*
 
-  - busytimes module along with popular_times() function will be deprecated
-</i>
+  - *busytimes module along with popular_times() function will be deprecated*
 
 # Copyright
 Copyright (c) 2020 The Python Packaging Authority. Released under the MIT License.
