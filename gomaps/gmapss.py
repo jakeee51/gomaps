@@ -5,7 +5,7 @@ Application Name: gmapss
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/17/20
+#8/18/20
 
 import requests, signal, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -76,10 +76,16 @@ class GoogleMaps:
       except (TypeError, AttributeError):
          pass
       try:
-         website = re.search(r"Web Result with Site Links.+?onmousedown",
+         website1 = re.search(r"Web results.+?onmousedown",
                              resp.html.html)
-         self.website = re.sub(r"Web Result with Site Links.+?href=\"", '',
-                               website.group()).strip("\" onmousedown")
+         website2 = re.search(r"Web Result with Site Links.+?href=\".+?\"",
+                              resp.html.html)
+         if not website1:
+            self.website = re.sub(r"Web results.+?href=\"", '',
+                                  website2.group()).strip('"')
+         else:
+            self.website = re.sub(r"Web results.+?href=\"", '',
+                                  website1.group()).strip('" onmousedown')
       except (TypeError, AttributeError):
          pass
       try:
@@ -101,6 +107,14 @@ class GoogleMaps:
          self.__set_hours(hours.group())
       except (TypeError, AttributeError):
          pass
+      try:
+         ptimes = re.findall(r"\[\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},"\
+                             "\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2}\].+?wait",
+                            resp.html.html)
+         if ptimes:
+            self.__set_pop_times(ptimes)
+      except (TypeError, AttributeError):
+         pass
    def __set_hours(self, hours: str):
       self.open_hours["Hours"] = {}
       table = re.search(r"<td.+</td>", str(hours)).group().strip("</td>")
@@ -110,6 +124,24 @@ class GoogleMaps:
          day = row.split(' ')[0]
          open_times = row.split(' ')[1]
          self.open_hours["Hours"][day] = open_times
+   def __pop_hours(self) -> tuple:
+      pop_hours = tuple()
+      for hour in range(6, 24):
+         if hour < 12:
+            pop_hours += ("% busy at " + str(hour) + " AM",)
+         elif hour == 12:
+            pop_hours += ("% busy at 12 PM",)
+         else:
+            pop_hours += ("% busy at " + str(hour-12) + " PM",)
+      return pop_hours
+   def __set_pop_times(self, ptimes: list):
+      days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      i = 0
+      for day in ptimes:
+         parse = re.sub(r"(?<=]).+", '', day).strip("[]") + ','
+         prep = parse.replace(',', "{},")
+         times = prep.format(*self.__pop_hours()).strip(',')
+         self.popular_times[days[i]] = times.split(','); i += 1
    def __set_values(self):
          self.values["title"] = self.title
          self.values["url"] = self.url
@@ -119,10 +151,12 @@ class GoogleMaps:
          self.values["phone_number"] = self.phone_number
          self.values["rating"] = self.rating
          self.values["open_hours"] = self.open_hours
+         self.values["popular_times"] = self.popular_times
 
    def get_values(self):
       self.address = self.website = None; self.values = {}
       self.phone_number = self.rating = None; self.open_hours = {}
+      self.popular_times = {}
       self.__set_attrs(self.oq)
       self.__set_values()
       return self.values
@@ -156,7 +190,8 @@ class GoogleMapsResults:
       self.__sesh = HTMLSession(); self.url = None
       self.__resp = GoogleMaps(self.oq, self.__sesh)
       if self.__resp.url != None: # Check if query only yields single result
-         self.__results.append(self.__resp); del(self.__resp)
+         self.__results.append(self.__resp)
+         self.url = self.__resp.url; del(self.__resp)
       else:
          try:
             self._place_names = self._get_place_names(self.oq) or [self.__n_a]

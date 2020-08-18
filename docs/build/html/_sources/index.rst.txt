@@ -6,6 +6,16 @@
 **Welcome to the Gomaps documentation!**
 ========================================
 
+
+.. image:: https://img.shields.io/pypi/v/gomaps.svg
+   :target: https://pypi.org/project/gomaps
+   :alt: latest release
+
+.. image:: https://pepy.tech/badge/gomaps/month
+   :target: https://pepy.tech/project/gomaps/month
+
+.. image:: https://readthedocs.org/projects/gomaps/badge/
+
 Gomaps, is a Google Maps API that web scrapes data of places based on a query string.
 
 .. toctree::

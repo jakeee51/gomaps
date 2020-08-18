@@ -51,6 +51,10 @@ The function ``maps_search()`` is returning a :py:class:`~gomaps.GoogleMapsResul
                     'Hours': {'Friday': '8AM–11PM', 'Saturday': '8AM–11PM', 'Sunday': '8AM–11PM',
                               'Monday': '8AM–11PM', 'Tuesday': '8AM–11PM', 'Wednesday': '8AM–11PM', 'Thursday': '8AM–11PM'}
                    }
+     'popular_times': {
+                       'Sunday': ['0% busy at 6 AM', '0% busy at 7 AM', '19% busy at 8 AM', '35% busy at 9 AM', '48% busy at 10 AM', '52% busy at 11 AM', '49% busy at 12 PM', '44% busy at 1 PM', '45% busy at 2 PM', '49% busy at 3 PM', '52% busy at 4 PM', '52% busy at 5 PM', '57% busy at 6 PM', '70% busy at 7 PM', '78% busy at 8 PM', '66% busy at 9 PM', '39% busy at 10 PM', '0% busy at 11 PM'], 
+                       'Monday':  ...
+                       }
    }
    '''
 
@@ -60,6 +64,10 @@ Reason why I have a separate function to get the rest of the attributes is for s
 
 :py:func:`~gomaps.popular_times`
 ++++++++++++++++++++++++++++++++
+ 
+..warning::  Note
+   
+   Test
 
 To be able to utilize the ``popular_times()`` function, you'll need to download a :ref:`web driver <drivers>`. Afterwards, put the path to the web driver as the second argument of the function.
 

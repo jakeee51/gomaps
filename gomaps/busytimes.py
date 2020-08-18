@@ -5,7 +5,7 @@ Application Name: busytimes
 Functionality Purpose: Web scrape Google Maps Popular Times data
 Version: Beta
 '''
-#8/10/20
+#8/18/20
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -16,10 +16,8 @@ from urllib.request import urlopen, urlparse, urlretrieve
 from urllib.parse import quote_plus, unquote_plus
 from .gmapss import GoogleMaps
 import GeoLiberator as GL
-import re
+import re, os, time, traceback
 import pandas as pd
-import os
-import time
 try:
     from bs4 import BeautifulSoup
 except ImportError:
@@ -28,11 +26,7 @@ except ImportError:
 #Populate each day with 24 hour-clock
 #Append date timestamps for each week
     #ex: 1/1/2019 8:30:00
-#Modularize & Optimize (lighten weight by getting rid of selenium and openpyxl)
 
-#Account for multiple map results
-#Append Coordinates, City, State
-#Speed optimization
 #Web scrape maximum fire dept building occupancy capacity
 
 exceptions = ["""
@@ -40,7 +34,16 @@ exceptions = ["""
     Suggestions:
     • Addresses don't work, only place names.
     • Make sure all words are spelled correctly.
-    • Try adding a city, state, or zip code to the place name."""]
+    • Try adding a city, state, or zip code to the place name.""",
+              """Warning: The module *busytimes.py* will be deprecated!
+    In place of the popular_times() function, one can now
+    soley rely on the maps_search() function to scrape
+    popular times data after the get_values() method is called."""]
+
+try:
+    raise Exception(exceptions[1])
+except:
+    traceback.print_exc()
 
 class LocationNotFoundError(Exception):
     pass

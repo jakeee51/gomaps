@@ -2,9 +2,17 @@
   <img src="https://img.shields.io/pypi/v/gomaps.svg" alt="latest release" />
 </a>
 
+<a href="https://pepy.tech/project/gomaps/month">
+  <img src="https://pepy.tech/badge/gomaps/month" />
+</a>
+
+<a href="https://gomaps.readthedocs.io/en/latest/">
+  <img src="https://readthedocs.org/projects/gomaps/badge/" />
+</a>
+
 # The-Gomaps-Python-Package
 
-Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search (No API key needed). Results of a query include the following:
+Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search (No API key needed). Results of a query include the following data:
 
 * Place Name
 * Place Google Maps URL
@@ -14,8 +22,9 @@ Gomaps! A Google Maps API for querying places on Google Maps and scraping the me
 * Place Phone Number
 * Place Star Rating
 * Place Open Hours
+* Place Popular Times
 
-There is also another feature within this package that scrapes Google Maps __Popular Times__ data!
+This can also scrape Google Maps __Popular Times__ data!
 
 <h2><b>Documentation:</b></h2>
 <a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/en/latest/</a>
@@ -43,38 +52,19 @@ result[0].get_values() # Populates the object's attributes & returns a dictionar
                  'Hours': {'Friday': '8AM–11PM', 'Saturday': '8AM–11PM', 'Sunday': '8AM–11PM',
                            'Monday': '8AM–11PM', 'Tuesday': '8AM–11PM', 'Wednesday': '8AM–11PM', 'Thursday': '8AM–11PM'}
                 }
-}
-'''
-
-from gomaps import popular_times
-
-result = popular_times("Tops Diner", "chromedriver.exe") # See 'Drivers' section below regarding the 'chromedriver.exe' argument
-'''
-{
-  'Sunday': ['0% busy at 6 AM.', '0% busy at 7 AM.', '20% busy at 8 AM.', '34% busy at 9 AM.', '49% busy at 10 AM.',
-             '59% busy at 11 AM.', '62% busy at 12 PM.', '56% busy at 1 PM.', '47% busy at 2 PM.', '41% busy at 3 PM.',
-             '45% busy at 4 PM.', '57% busy at 5 PM.', '70% busy at 6 PM.', '74% busy at 7 PM.', '66% busy at 8 PM.',
-             '47% busy at 9 PM.', '27% busy at 10 PM.', '0% busy at 11 PM.'],
-  'Monday': ...
+  'popular_times': {
+                    'Sunday': ['0% busy at 6 AM', '0% busy at 7 AM', '19% busy at 8 AM', '35% busy at 9 AM', '48% busy at 10 AM', '52% busy at 11 AM', '49% busy at 12 PM', '44% busy at 1 PM', '45% busy at 2 PM', '49% busy at 3 PM', '52% busy at 4 PM', '52% busy at 5 PM', '57% busy at 6 PM', '70% busy at 7 PM', '78% busy at 8 PM', '66% busy at 9 PM', '39% busy at 10 PM', '0% busy at 11 PM'], 
+                    'Monday':  ...
+                    }
 }
 '''
 ```
 
-<h2><b>Drivers:</b></h2>
-Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure it's in your PATH, e. g., place it in /usr/bin or /usr/local/bin.
-
-Failure to observe this step will give you an error selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.
-
-Other supported browsers will have their own drivers available. Links to some of the more popular browser drivers follow. *(Note: PhantomJS is another alternative)*
-
-|          |                                                                       |
-|----------|-----------------------------------------------------------------------|
-| Chrome:  | https://sites.google.com/a/chromium.org/chromedriver/downloads        |
-| Edge:    | https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ |
-| Firefox: | https://github.com/mozilla/geckodriver/releases                       |
-| Safari:  | https://webkit.org/blog/6900/webdriver-support-in-safari-10/          |
-
-*source: https://pypi.org/project/selenium/*
+<h2><b>Patch Notes:</b></h2><i>
+* **0.2.0**
+- popular_times attribute now appended to `maps_search()` result!
+- busytimes module along with popular_times() function will be deprecated
+</i>
 
 # Copyright
 Copyright (c) 2020 The Python Packaging Authority. Released under the MIT License.
