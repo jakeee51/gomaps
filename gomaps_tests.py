@@ -3,7 +3,6 @@ import gomaps, time
 if __name__ == "__main__":
    t0 = time.process_time()
 
-   print(gomaps.popular_times("Tops Diner", "chromedriver.exe"))
    results = gomaps.maps_search("Tops Diner, NJ", single=True)
    print(results.get_values())
 
