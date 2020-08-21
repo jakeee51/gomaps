@@ -16,7 +16,7 @@
 
 # The-Gomaps-Python-Package
 
-Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search (No API key needed). Results of a query include the following data:
+Gomaps! A Google Maps web scraper for querying places on Google Maps and scraping the metadata of that search (No API key needed). It's essentially a lite version of the Google Places API. Results of a query include the following data:
 
 * Place Name
 * Place Google Maps URL
@@ -67,16 +67,6 @@ results[0].get_values() # Populates the object's attributes & returns a dictiona
 }
 '''
 ```
-
-<h2><b>Patch Notes:</b></h2>
-<i><b>0.2.0</b>
-  
-  - A **popular_times** attribute is now appended to the GoogleMaps object! This optimizes speed, efficiency and convenience.
-
-  - The **busytimes** module along with `popular_times()` function will be deprecated.
-  
-  - Less dependencies required (including selenium).
-</i>
 
 # Copyright
 Copyright (c) 2020 The Python Packaging Authority. Released under the MIT License.
