@@ -4,7 +4,10 @@ if __name__ == "__main__":
    t0 = time.process_time()
 
    results = gomaps.maps_search("Tops Diner, NJ", single=True)
-   print(results.get_values())
+   values = results.get_values()
+   for val in values.values():
+      print(val)
+      assert val == None, "Gomaps results missing values!"
 
    t1 = time.process_time()
    total = t1 - t0

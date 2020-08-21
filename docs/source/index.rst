@@ -15,6 +15,10 @@
 
 .. image:: https://readthedocs.org/projects/gomaps/badge/
 
+
+.. image:: https://travis-ci.org/jakeee51/gomaps.svg?branch=master&status=passed
+   :target: https://travis-ci.org/github/jakeee51/gomaps
+
 Gomaps, is a Google Maps API that web scrapes data of places based on a query string.
 
 .. toctree::
