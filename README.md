@@ -10,6 +10,10 @@
   <img src="https://readthedocs.org/projects/gomaps/badge/" />
 </a>
 
+<a href="https://travis-ci.org/github/jakeee51/gomaps">
+  <img src="https://travis-ci.org/jakeee51/gomaps.svg?branch=master&status=passed" />
+</a>
+
 # The-Gomaps-Python-Package
 
 Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search (No API key needed). Results of a query include the following data:
