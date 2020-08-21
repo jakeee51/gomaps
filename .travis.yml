@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+cache: pip
+install: 
+  - pip install requests_html pyppdf GeoLiberator
+  - pip install git+https://github.com/jakeee51/gomaps
+script:
+  - python3 gomaps_tests.py
