@@ -9,7 +9,7 @@ setuptools.setup(
     author = "David J. Morfe",
     author_email = "jakemorfe@gmail.com",
     license = "MIT",
-    description = "A Google Maps web scraper that retrieves place data based on a search",
+    description = "A Google Maps web scraper that gets place data based on a search",
     long_description=long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/jakeee51/gomaps",
