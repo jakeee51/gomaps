@@ -136,9 +136,13 @@ the result of the query. It also resolves the new redirected Google Maps URL.</p
 <dl class="py method">
 <dt id="gomaps.GoogleMaps.get_values">
 <code class="sig-name descname">get_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMaps.get_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>This sends an additional request to the new url attribute, populates the rest of the attributes, then returns a Python dictionary of all the attributes.</p>
+<dd><p>This sends an additional request, populates the rest of the attributes, then returns a Python dictionary of all the attributes.</p>
 </dd></dl>
 
+<div class="admonition-tip admonition">
+<p class="admonition-title">Tip</p>
+<p>The GoogleMaps object’s attributes can be accessed via the dot operator or key indexing. (ex: <code class="docutils literal notranslate"><span class="pre">result[coords]</span></code> or <code class="docutils literal notranslate"><span class="pre">result.coords</span></code>)</p>
+</div>
 </dd></dl>
 
 </div>
@@ -220,7 +224,7 @@ the result(s) within a list-like object.</p>
 </div>
 <dl class="field-list">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns a GoogleMapsResults object containing GoogleMaps objects from the search. Otherwise, returns GoogleMaps object if <code class="docutils literal notranslate"><span class="pre">single=True</span></code>.</p>
+<dd class="field-odd"><p>Returns a GoogleMapsResults object containing GoogleMaps objec from the search. Otherwise, returns GoogleMaps object if <code class="docutils literal notranslate"><span class="pre">single=True</span></code>.</p>
 </dd>
 <dt class="field-even">Example</dt>
 <dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">gomaps</span><span class="o">.</span><span class="n">maps_search</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">)</span>

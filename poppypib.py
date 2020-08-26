@@ -1,3 +1,6 @@
+# This script is to truncate the pypi badge upon deploying to reduce redundancy
+# poppypib - Pop PyPi Badge
+
 import re
 
 def edit_file(file: str, value: str='', regex=None):

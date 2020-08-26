@@ -8,3 +8,5 @@ Version: Beta
 
 name = "gomaps"
 from .gmapss import GoogleMaps, GoogleMapsResults, maps_search
+from .utils import geocoder, get_url, get_title, get_address, get_website,\
+     get_phone_number, get_rating, get_open_hours, get_popular_times

@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 '''
 Author: David J. Morfe
-Application Name: gmapss
+Application Name: gmapss (Google Maps Search)
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/18/20
+#8/26/20
 
-import requests, signal, time, os, sys, re
-import pyppdf.patch_pyppeteer
-from requests_html import HTMLSession
-from urllib.parse import quote_plus, unquote_plus
+# &gws_rd=cr -> implement optional redirects
 
-# Optimize speed
+import signal, time, os, sys, re
+from .utils import *
+
+def __keyboardInterruptHandler(signal, frame):
+    print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
+    exit(0)
+signal.signal(signal.SIGINT, __keyboardInterruptHandler)
+
+class InvalidFieldsError(Exception):
+   pass
 
 class GoogleMaps:
    '''A response object from a Google Maps request
@@ -20,9 +26,9 @@ class GoogleMaps:
    This class is initialized with a search string (query) and returns
    the result of the query. It also resolves the new redirected Google Maps URL.
 
-   :param query: A search string that's assigned to the '?q=' URL argument.
+   :param q: A search string that's assigned to the '?q=' URL argument.
    :param session: An HTMLSession object from the requests_html Python package.
-   :type query: str
+   :type q: str
    :type session: requests_html.HTMLSession
 
    :returns: A single GoogleMaps object already containing the queried place's url, title, and lat/long coordinates
@@ -30,30 +36,63 @@ class GoogleMaps:
    __mq = "https://www.google.com/maps?q="
    __sq = "https://www.google.com/search?q="
    __resp = None
+   VALID_FIELDS = ["title", "url", "coords", "coordinates", "address",
+                   "website", "phone_number", "rating", "open_hours", "popular_times"]
 
-   def __init__(self, query: str, session=None):
+   def __init__(self, q: str, fields: list=[], url_args: str='', session=None):
       if session != None:
          self.__sesh = session
       else:
          self.__sesh = HTMLSession()
-      self.oq = re.sub(self.__mq, '', query.replace('+', ' '))
+      self.oq = re.sub(fr"({self.__mq}|{self.__sq})", '', q.replace('+', ' '))
       self.query = self.__mq + quote_plus(self.oq)
       self.__resp = requests.get(self.query)
       url_components = re.search(
          r'https://www.google.com/maps/preview/place/.+?\\"', self.__resp.text)
-      self.url = self.title = None
-      self.coords = self.coordinates = (None,None)
-      self.__set_url(url_components); del(self.__resp)
+      self.url = self.title = self.__fields_valid = None
+      if len(fields) != 0:
+         self.__fields_valid = self.__fields_check(fields)
+         if self.__fields_valid:
+            self.__attribute_fields(fields)
+            self.__set_url(url_components); del(self.__resp)
+            self.get_values(fields)
+      else:
+         self.coords = self.coordinates = (None,None)
+         self.__set_url(url_components); del(self.__resp)
    def __repr__(self):
-      if self.url == None:
+      if self.__fields_valid:
+         return f"{self.values}"
+      elif self.url == None:
          return f"<gomaps.GoogleMaps object; Place Not Found>"
-      return f"<gomaps.GoogleMaps object; Place-Name: {self.title}>"
+      else:
+         return f"<gomaps.GoogleMaps object; Place-Name: {self.title}>"
    def __iter__(self):
       return iter(self.values)
    def __getitem__(self, key):
       return self.values[key]
 
-   def __set_url(self, url_exists):
+   def __fields_check(self, fields: list=[]) -> bool:
+      if len(fields) > 10:
+         raise InvalidFieldsError("Too many fields specified!")
+      for field in fields:
+         if field in self.VALID_FIELDS:
+            pass
+         else:
+            raise InvalidFieldsError("1 or more of the fields entered are invalid!\n"\
+                                     "Check self.VALID_FIELDS for reference.")
+      return True
+   def __attribute_fields(self, fields: list=[]):
+      for attr in fields:
+         if attr == "open_hours":
+            self.open_hours = {}
+         elif attr == "popular_times":
+            self.popular_times = {}
+         elif attr in self.VALID_FIELDS[2:4]:
+            self.coords = self.coordinates = (None,None)
+         else:
+            if attr not in self.__dict__:
+               self.__dict__[attr] = None
+   def __set_url(self, url_exists: re): # set the url, title & coords attributes
       if url_exists:
          prefix = re.sub(r"\?q=", "/place/", self.__mq).replace('+', "\+")
          path = re.search(fr'{prefix}.+?/data.+?\\"', self.__resp.text).group()
@@ -66,55 +105,22 @@ class GoogleMaps:
          title = re.search(r"(?<=https://www.google.com/maps/place/)\w+.*?/@",
                                 self.url).group().strip("/@")
          self.title = unquote_plus(title)
-   def __set_attrs(self, query: str):
+   def __set_attrs(self, query: str, fields: list=[]):
       resp = self.__sesh.get(self.__sq + quote_plus(query)); resp.html.render()
-      try:
-         address = re.search(r"Address</a>: </span>.+?</span>",
-                             resp.html.html)
-         self.address = re.sub(r"Address</a>: </span>.+?>", '',
-                               address.group()).strip("</span>")
-      except (TypeError, AttributeError):
-         pass
-      try:
-         website1 = re.search(r"Web results.+?onmousedown",
-                             resp.html.html)
-         website2 = re.search(r"Web Result with Site Links.+?href=\".+?\"",
-                              resp.html.html)
-         if not website1:
-            self.website = re.sub(r"Web results.+?href=\"", '',
-                                  website2.group()).strip('"')
-         else:
-            self.website = re.sub(r"Web results.+?href=\"", '',
-                                  website1.group()).strip('" onmousedown')
-      except (TypeError, AttributeError):
-         pass
-      try:
-         phone = re.search(r"Phone</a>: </span>.+?</span>", resp.html.html)
-         self.phone_number = re.search(r"\(?\d{3}\)? \d{3}-\d{4}", phone.group()).group()
-      except (TypeError, AttributeError):
-         pass
-      try:
-         rating = re.search(r"Rated \d\.?\d? out of 5", resp.html.html)
-         self.rating = rating.group().strip(" out of 5").strip("Rated ")
-      except (TypeError, AttributeError):
-         pass
-      try:
-         hours = re.search(r"Hours</a>: </span>.+?</table>", resp.html.html)
-         current = re.search(r"(Opens|Close[sd])( soon)?</b>...((Opens|Closes) \d{1,2}(AM|PM))",
-                             resp.html.html)
-         if current:
-            self.open_hours["Currently"] = f"{current.group(1)} - {current.group(3)}"
-         self.__set_hours(hours.group())
-      except (TypeError, AttributeError):
-         pass
-      try:
-         ptimes = re.findall(r"\[\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},"\
-                             "\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2},\d{1,2}\].+?wait",
-                            resp.html.html)
-         if ptimes:
+      if self.__fields_valid and len(fields) != 0:
+         attrs_switch(self, resp.html.html, fields)
+      else:
+         self.address = get_address(resp.html.html)
+         self.website = get_website(resp.html.html)
+         self.phone_number = get_phone_number(resp.html.html)
+         self.rating = get_rating(resp.html.html)
+         hours_results = get_open_hours(resp.html.html)
+         if hours_results[1] != None:
+            self.open_hours["Currently"] = hours_results[1]
+         self.__set_hours(hours_results[0])
+         ptimes = get_popular_times(resp.html.html)
+         if ptimes != None:
             self.__set_pop_times(ptimes)
-      except (TypeError, AttributeError):
-         pass
    def __set_hours(self, hours: str):
       self.open_hours["Hours"] = {}
       table = re.search(r"<td.+</td>", str(hours)).group().strip("</td>")
@@ -142,24 +148,33 @@ class GoogleMaps:
          prep = parse.replace(',', "{},")
          times = prep.format(*self.__pop_hours()).strip(',')
          self.popular_times[days[i]] = times.split(','); i += 1
-   def __set_values(self):
+   def __set_values(self, fields: list=[]):
+      if self.__fields_valid and len(fields) != 0:
+         self.values = values_switch(self, fields)
+      else:
          self.values["title"] = self.title
          self.values["url"] = self.url
-         self.values["address"] = self.address
          self.values["coords"] = self.coords
+         self.values["address"] = self.address
          self.values["website"] = self.website
          self.values["phone_number"] = self.phone_number
          self.values["rating"] = self.rating
          self.values["open_hours"] = self.open_hours
          self.values["popular_times"] = self.popular_times
 
-   def get_values(self):
-      self.address = self.website = None; self.values = {}
-      self.phone_number = self.rating = None; self.open_hours = {}
-      self.popular_times = {}
-      self.__set_attrs(self.oq)
-      self.__set_values()
-      return self.values
+   def get_values(self, fields: list=[]):
+      if self.__fields_valid and len(fields) != 0:
+         self.values = {}
+         self.__set_attrs(self.oq, fields)
+         self.__set_values(fields)
+         return self.values
+      else:
+         self.address = self.website = None; self.values = {}
+         self.phone_number = self.rating = None; self.open_hours = {}
+         self.popular_times = {}
+         self.__set_attrs(self.oq)
+         self.__set_values()
+         return self.values
 
 class GoogleMapsResults:
    '''A response object containing GoogleMaps objects as a result of the request
@@ -167,11 +182,11 @@ class GoogleMapsResults:
    This class is initialized with a search string (query) and returns
    the result(s) within a list-like object.
 
-   :param query: A search string that's assigned to the '?q=' URL argument.
+   :param q: A search string that's assigned to the '?q=' URL argument.
    :param page_num: The number refering to the page of the results to be web scraped.
    :param delay: An integer specifying the time in seconds to wait after each request.
    :param log: If True, prints the places' GoogleMaps object as they're discovered.
-   :type query: str
+   :type q: str
    :type page_num: int
    :type delay: int
    :type log: bool
@@ -183,8 +198,9 @@ class GoogleMapsResults:
    __n_a = "There are no local results matching your search!"
    __results = []
 
-   def __init__(self, query: str, page_num=1, delay=10, log=False):
-      self.oq = re.sub(self.__sq, '', query.replace('+', ' '))
+   def __init__(self, q: str, page_num: int=1, url_args: str='',
+                delay: int=10, log: bool=False):
+      self.oq = re.sub(self.__sq, '', q.replace('+', ' '))
       self.query = self.__sq + quote_plus(self.oq)
       self.__pn = page_num; self.delay = delay
       self.__sesh = HTMLSession(); self.url = None
@@ -244,13 +260,8 @@ class GoogleMapsResults:
    def list(self) -> list:
       return self.__results
 
-def __keyboardInterruptHandler(signal, frame):
-    print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
-    exit(0)
-signal.signal(signal.SIGINT, __keyboardInterruptHandler)
-
-def maps_search(q: str, page_num: int=1, delay: int=10,
-                log: bool=False, single: bool=False): # Returns list unless single is True
+def maps_search(q: str, page_num: int=1, delay: int=10, url_args: str='',
+                log: bool=False, single: bool=False, fields: list=[]): # Returns list unless single is True
    '''Searches for a place(s) on Google Maps & returns the results
 
    :param q: The query string used to search Google Maps.
@@ -259,16 +270,16 @@ def maps_search(q: str, page_num: int=1, delay: int=10,
    :param log: If True, prints the found results as they occur.
    :param single: If True, only returns the single GoogleMaps object directly.
 
-   .. warning:: delay cannot be less than 3 seconds, otherwise bot will be detected and blocked for too many requests
+   .. warning:: delay cannot be less than 5 seconds, otherwise bot will be detected and blocked for too many requests
 
    :returns: Returns a GoogleMapsResults object containing GoogleMaps objects from the search
    '''
-   if single:
-      return GoogleMaps(q)
+   if single or len(fields) > 0:
+      return GoogleMaps(q, fields=fields)
    if re.search(r"^.+\..+$", q) and ' ' not in q:
       q = re.sub(r"(https?://)?www\.google\.com/(search|maps)\?q=",
                  '', q)
       q = unquote_plus(q)
-   if delay < 3:
-      delay = 3
+   if delay < 5:
+      delay = 5
    return GoogleMapsResults(q, page_num, delay, log)

@@ -63,7 +63,11 @@ GoogleMaps class
 
    .. py:method:: get_values
 
-      This sends an additional request to the new url attribute, populates the rest of the attributes, then returns a Python dictionary of all the attributes.
+      This sends an additional request, populates the rest of the attributes, then returns a Python dictionary of all the attributes.
+
+   .. admonition:: Tip
+
+      The GoogleMaps object's attributes can be accessed via the dot operator or key indexing. (ex: ``result[coords]`` or ``result.coords``)
 
 GoogleMapsResults class
 +++++++++++++++++++++++
@@ -124,7 +128,7 @@ Main Functions
 
    .. warning:: *'delay'* cannot be less than 3 seconds, otherwise bot may be detected and blocked for too many requests
 
-   :returns: Returns a GoogleMapsResults object containing GoogleMaps objects from the search. Otherwise, returns GoogleMaps object if ``single=True``.
+   :returns: Returns a GoogleMapsResults object containing GoogleMaps objec from the search. Otherwise, returns GoogleMaps object if ``single=True``.
 
    :example: >>> results = gomaps.maps_search("Tops Diner")
 	         >>> place = results[0].get_values()
