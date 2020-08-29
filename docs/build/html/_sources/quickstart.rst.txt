@@ -1,7 +1,7 @@
 **QuickStart**
 ====================
 
-Gomaps! A Google Maps API for querying places on Google Maps and scraping the metadata of that search. Results of a query include the following:
+Gomaps! A Google Maps web scraper for querying places on Google Maps and scraping the metadata of that search (No API key needed). This package also does geocoding, reverse geocoding and address validation! It's essentially a lite version of the Google Maps Places API. Results of a query include the following:
 
 * Place Name
 * Place Google Maps URL
@@ -48,7 +48,7 @@ The function ``maps_search()`` is returning a :py:class:`~gomaps.GoogleMapsResul
      'coords': ('40.7506065', '-74.1639023'),
      'website': 'https://www.thetopsdiner.com/',
      'phone_number': '(973) 481-0490',
-     'rating': '4.6',
+     'rating': 4.6,
      'open_hours': {'Currently': 'Closed - Opens 8AM',
                     'Hours': {'Friday': '8AM–11PM', 'Saturday': '8AM–11PM', 'Sunday': '8AM–11PM',
                               'Monday': '8AM–11PM', 'Tuesday': '8AM–11PM', 'Wednesday': '8AM–11PM', 'Thursday': '8AM–11PM'}

@@ -126,11 +126,106 @@ Main Functions
    :type log: bool
    :type single: bool
 
-   .. warning:: *'delay'* cannot be less than 3 seconds, otherwise bot may be detected and blocked for too many requests
+   .. warning:: *'delay'* cannot be less than 5 seconds, otherwise bot may be detected and blocked for too many requests
 
    :returns: Returns a GoogleMapsResults object containing GoogleMaps objec from the search. Otherwise, returns GoogleMaps object if ``single=True``.
 
    :example: >>> results = gomaps.maps_search("Tops Diner")
-	         >>> place = results[0].get_values()
-	         >>> place.rating
-	         '4.6'
+             >>> place = results[0].get_values()
+             >>> place.rating
+             4.6
+
+.. admonition:: Tip
+
+   The following functions are overloaded. That being said the functions with ``data`` as a parameter can take an HTML string as input for ``data`` as well as a normal query string.
+
+.. py:function:: gomaps.geocoder(location: str, reverse: bool=False)
+
+   Searches for the lattitude & longitude coordinates of a location.
+   Reverse geocoding searches for the location of coordinates
+
+   :param location: A place name, address or lat/long coordinates
+   :param reverse: If True, uses reverse geocoder
+
+   .. admonition:: Note
+
+      This function doesn't scrape *everything*. As a result, it is especially lightweight as opposed to using maps_search
+
+   :returns: Returns a tuple of lat/long coordinates or address of the location if ``reverse=True``'''
+
+   :example: >>> result = gomaps.geocoder("Tops Diner")
+             >>> result
+             ('40.7506065', '-74.1639023')
+
+
+
+.. py:function:: gomaps.get_url(data: str)
+
+   Searches for full Google Maps URL of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the redirected URL
+
+.. py:function:: gomaps.get_title(data: str)
+
+   Searches for the title or name of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the location's title
+
+
+
+.. py:function:: gomaps.get_address(data: str, validate: bool=False)
+
+   Searches for the full address of a location
+
+   :param data: A place name, address or lat/long coordinates
+   :param validate: If True, attempts to validate address
+
+   :returns: Returns a string of the location's address
+
+.. py:function:: gomaps.get_website(data: str)
+
+   Searches for the website (if any) of a location
+
+   :param data: A place name
+
+   :returns: Returns a string of the location's website
+
+
+
+.. py:function:: gomaps.get_phone_number(data: str)
+
+   Searches for the phone number (if any) of a location
+
+   :param data: A place name
+
+   :returns: Returns a string of the location's phone number
+
+.. py:function:: gomaps.get_rating(data: str)
+
+   Searches for the rating (if any) of a location
+
+   :param data: A place name
+
+   :returns: Returns a float of the location's rating
+
+
+
+   .. py:function:: gomaps.get_open_hours(data: str)
+
+   Searches for the open hours (if any) of a location
+
+   :param data: A place name
+
+   :returns: Returns a string of the location's open hours
+
+.. py:function:: gomaps.get_popular_times(data: str)
+
+   Searches for the Google Maps popular times (if any) of a location
+
+   :param data: A place name
+
+   :returns: Returns a string of the location's popular times

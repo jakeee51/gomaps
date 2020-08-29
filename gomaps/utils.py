@@ -5,7 +5,7 @@ Application Name: gomaps.utils
 Functionality Purpose: Provides utility functions with some also useful for external consumption
 Version: Beta
 '''
-#8/26/20
+#8/29/20
 
 import requests, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -43,8 +43,18 @@ def __is_address(location: str) -> str:
          return False
    return addr
 
-def geocoder(location, reverse: bool=False) -> tuple: # gets geographical lat/long coordinates
-   '''Note: this function is especially lightweight as opposed to using maps_search'''
+def geocoder(location, reverse: bool=False): # gets geographical lat/long coordinates or reverse geocodes
+   '''Searches for the lattitude & longitude coordinates of a location.
+   Reverse geocoding searches for the location of coordinates
+
+   :param location: A place name, address or lat/long coordinates
+   :param reverse: If True, uses reverse geocoder & will return string
+
+   .. admonition:: Note
+
+      This function is especially lightweight as opposed to using maps_search
+
+   :returns: Returns tuple of lat/long coordinates or address of the location if ``reverse=True``'''
    if not reverse:
       q = __clean_location(str(location))
       html = __direct_google_maps(q)
@@ -57,9 +67,25 @@ def geocoder(location, reverse: bool=False) -> tuple: # gets geographical lat/lo
       except (TypeError, AttributeError):
          return None
    else:
-      pass
+      try:
+         location = location.replace(' ', '').split(',')
+      except (TypeError, AttributeError):
+         pass
+      assert type(location) == tuple or type(location) == list, \
+             "Argument 'location' must be tuple, list, or string seprated by comma!"
+      q = str(location).strip("()")
+      html = __direct_google_maps(q)
+      got = re.search(r'\[\[\\"400.+?\\"\]\\n\]\\n\]\\n,.+?°', html)
+      if got:
+         addr = re.sub(r'\\"\].+$', '', got.group()).strip('[\\"')
+         return addr
 
 def get_url(data: str) -> str: # parses new url
+   '''Searches for full Google Maps URL of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the redirected URL'''
    if len(data) > 128:
       try:
          url_components = re.search(
@@ -79,6 +105,11 @@ def get_url(data: str) -> str: # parses new url
       return get_url(html)
 
 def get_title(data: str) -> str: # parses title
+   '''Searches for the title or name of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the location's title'''
    if len(data) > 128:
       try:
          url_components = re.search(
@@ -100,6 +131,12 @@ def get_title(data: str) -> str: # parses title
       return get_title(html)
 
 def get_address(data: str, validate=False): # parses address
+   '''Searches for the full address of a location
+
+   :param data: A place name, address or lat/long coordinates
+   :param validate: If True, attempts to validate address
+
+   :returns: Returns a string of the location's address'''
    if len(data) > 128:
       address = None
       if validate:
@@ -117,6 +154,8 @@ def get_address(data: str, validate=False): # parses address
          except (TypeError, AttributeError):
             return None
    else:
+      assert type(data) != tuple or type(data) != list, \
+             "If you wish to get address from coordinates, use 'gomaps.geocoder()'"
       q = __clean_location(str(data))
       if q != "OTHER":
          validate = True
@@ -124,6 +163,11 @@ def get_address(data: str, validate=False): # parses address
       return get_address(html, validate)
 
 def get_website(data: str) -> str: # parses website
+   '''Searches for the website (if any) of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the location's website'''
    if len(data) > 128:
       try:
          website1 = re.search(r"Web results.+?onmousedown",
@@ -143,6 +187,11 @@ def get_website(data: str) -> str: # parses website
       return get_website(html)
 
 def get_phone_number(data: str) -> str: # parses phone number
+   '''Searches for the phone number (if any) of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the location's phone number'''
    if len(data) > 128:
       try:
          phone = re.search(r"Phone</a>: </span>.+?</span>", data)
@@ -154,6 +203,11 @@ def get_phone_number(data: str) -> str: # parses phone number
       return get_phone_number(html)
 
 def get_rating(data: str) -> float: # parses rating
+   '''Searches for the rating (if any) of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a float of the location's rating'''
    if len(data) > 128:
       try:
          rating = re.search(r"Rated \d\.?\d? out of 5", data)
@@ -165,6 +219,11 @@ def get_rating(data: str) -> float: # parses rating
       return get_rating(html)
 
 def get_open_hours(data: str) -> dict: # parses open hours
+   '''Searches for the open hours (if any) of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the location's open hours'''
    if len(data) > 128:
       try:
          hours = re.search(r"Hours</a>: </span>.+?</table>", data)
@@ -180,6 +239,11 @@ def get_open_hours(data: str) -> dict: # parses open hours
       return get_open_hours(html)
 
 def get_popular_times(data: str) -> dict: # parses popular times
+   '''Searches for the Google Maps popular times (if any) of a location
+
+   :param data: A place name, address or lat/long coordinates
+
+   :returns: Returns a string of the location's popular times'''
    if len(data) > 128:
       try:
          pop_times = re.findall(r"\[\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},"\

@@ -19,7 +19,7 @@
 .. image:: https://travis-ci.org/jakeee51/gomaps.svg?branch=master&status=passed
    :target: https://travis-ci.org/github/jakeee51/gomaps
 
-Gomaps, is a Google Maps API that web scrapes data of places based on a query string.
+Gomaps, is a Google Maps web scraper that retrieves the data of places based on a query string. It also does geocoding, reverse geocoding and address validation.
 
 .. toctree::
    :maxdepth: 2

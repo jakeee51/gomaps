@@ -220,7 +220,7 @@ the result(s) within a list-like object.</p>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><em>‘delay’</em> cannot be less than 3 seconds, otherwise bot may be detected and blocked for too many requests</p>
+<p><em>‘delay’</em> cannot be less than 5 seconds, otherwise bot may be detected and blocked for too many requests</p>
 </div>
 <dl class="field-list">
 <dt class="field-odd">Returns</dt>
@@ -230,9 +230,159 @@ the result(s) within a list-like object.</p>
 <dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">gomaps</span><span class="o">.</span><span class="n">maps_search</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">place</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">place</span><span class="o">.</span><span class="n">rating</span>
-<span class="go">&#39;4.6&#39;</span>
+<span class="go">4.6</span>
 </pre></div>
 </div>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-tip admonition">
+<p class="admonition-title">Tip</p>
+<p>The following functions are overloaded. That being said the functions with <code class="docutils literal notranslate"><span class="pre">data</span></code> as a parameter can take an HTML string as input for <code class="docutils literal notranslate"><span class="pre">data</span></code> as well as a normal query string.</p>
+</div>
+<dl class="py function">
+<dt id="gomaps.geocoder">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">geocoder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">location</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">reverse</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.geocoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the lattitude &amp; longitude coordinates of a location.
+Reverse geocoding searches for the location of coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> – A place name, address or lat/long coordinates</p></li>
+<li><p><strong>reverse</strong> – If True, uses reverse geocoder</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>This function doesn’t scrape <em>everything</em>. As a result, it is especially lightweight as opposed to using maps_search</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a tuple of lat/long coordinates or address of the location if <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code>’‘’</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">gomaps</span><span class="o">.</span><span class="n">geocoder</span><span class="p">(</span><span class="s2">&quot;Tops Diner&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">(&#39;40.7506065&#39;, &#39;-74.1639023&#39;)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_url">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for full Google Maps URL of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name, address or lat/long coordinates</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the redirected URL</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_title">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the title or name of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name, address or lat/long coordinates</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the location’s title</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_address">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_address</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">validate</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the full address of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – A place name, address or lat/long coordinates</p></li>
+<li><p><strong>validate</strong> – If True, attempts to validate address</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the location’s address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_website">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_website</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_website" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the website (if any) of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the location’s website</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_phone_number">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_phone_number</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_phone_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the phone number (if any) of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the location’s phone number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_rating">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_rating</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_rating" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the rating (if any) of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a float of the location’s rating</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt id="gomaps.get_open_hours">
+<code class="sig-name descname">get_open_hours</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_open_hours" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Searches for the open hours (if any) of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the location’s open hours</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gomaps.get_popular_times">
+<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_popular_times</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_popular_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the Google Maps popular times (if any) of a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A place name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string of the location’s popular times</p>
 </dd>
 </dl>
 </dd></dl>
