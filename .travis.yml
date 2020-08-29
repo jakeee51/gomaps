@@ -5,7 +5,7 @@ python:
   - 3.8
 cache: pip
 install: 
-  - pip install requests_html pyppdf GeoLiberator
+  - pip install requests_html pyppdf GeoLiberator pandas
   - pip install git+https://github.com/jakeee51/gomaps
 script:
   - python3 gomaps_tests.py
