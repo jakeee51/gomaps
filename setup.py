@@ -5,7 +5,7 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "gomaps",
-    version = "0.2.5",
+    version = "0.2.6",
     author = "David J. Morfe",
     author_email = "jakemorfe@gmail.com",
     license = "MIT",
@@ -15,7 +15,7 @@ setuptools.setup(
     url = "https://github.com/jakeee51/gomaps",
     install_requires = ["requests_html", "pyppdf", "GeoLiberator"],
     packages = setuptools.find_packages(),
-    py_modules = ["gmapss"],
+    py_modules = ["gmapss", "utils"],
     classifiers = [
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

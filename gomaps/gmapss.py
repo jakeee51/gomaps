@@ -5,7 +5,7 @@ Application Name: gmapss (Google Maps Search)
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/29/20
+#8/31/20
 
 # &gws_rd=cr -> implement optional redirects
 
@@ -204,7 +204,7 @@ class GoogleMapsResults:
       self.query = self.__sq + quote_plus(self.oq)
       self.__pn = page_num; self.delay = delay
       self.__sesh = HTMLSession(); self.url = None
-      self.__resp = GoogleMaps(self.oq, self.__sesh)
+      self.__resp = GoogleMaps(self.oq, session=self.__sesh)
       if self.__resp.url != None: # Check if query only yields single result
          self.__results.append(self.__resp)
          self.url = self.__resp.url; del(self.__resp)
