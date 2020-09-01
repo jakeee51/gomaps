@@ -7,16 +7,18 @@ Main Classes
 GoogleMaps class
 ++++++++++++++++
 
-.. py:class:: gomaps.GoogleMaps(query: str, session=None)
+.. py:class:: gomaps.GoogleMaps(query: str, fields=[], session=None)
 
    A response object from a Google Maps request
 
    This class is initialized with a search string (query) and returns
    the result of the query. It also resolves the new redirected Google Maps URL.
 
-   :param query: A search string that's assigned to the '?q=' URL argument.
+   :param q: A search string that's assigned to the '?q=' URL argument.
+   :param fields: Specify which data points to scrape.
    :param session: An HTMLSession object from the requests_html Python package.
-   :type query: str
+   :type q: str
+   :type fields: list
    :type session: requests_html.HTMLSession
 
    :returns: A single GoogleMaps object already containing the queried place's url, title, and lat/long coordinates
@@ -111,24 +113,20 @@ GoogleMapsResults class
 Main Functions
 --------------
 
-.. py:function:: gomaps.maps_search(q: str, page_num=1, delay=10, log=False, single=False)
+.. py:function:: gomaps.maps_search(q: str, page_num=1, delay=10, log=False, single=False, fields=[])
 
    Searches for a place(s) on Google Maps & returns the results
 
    :param q: The query string used to search Google Maps.
-   :param page_num: The number refering to the page of results to be web scraped.
+   :param page_num: The number refering to the page of the results to be web scraped.
    :param delay: The number specifying the time in seconds to wait after each request.
    :param log: If True, prints the found results as they occur.
-   :param single: If True, only returns the GoogleMaps object directly. (Note: Must not be amiguous to result in multiple places found)
-   :type q: str
-   :type page_num: int
-   :type delay: int
-   :type log: bool
-   :type single: bool
+   :param single: If True, only returns the single GoogleMaps object directly.
+   :param fields: If ``single=True``, specify which data points to scrape.
 
-   .. warning:: *'delay'* cannot be less than 5 seconds, otherwise bot may be detected and blocked for too many requests
+   .. warning:: delay cannot be less than 5 seconds, otherwise bot will be detected and blocked for too many requests
 
-   :returns: Returns a GoogleMapsResults object containing GoogleMaps objec from the search. Otherwise, returns GoogleMaps object if ``single=True``.
+   :returns: Returns a GoogleMapsResults object containing GoogleMaps objects from the search
 
    :example: >>> results = gomaps.maps_search("Tops Diner")
              >>> place = results[0].get_values()

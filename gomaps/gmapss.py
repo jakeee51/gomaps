@@ -5,7 +5,7 @@ Application Name: gmapss (Google Maps Search)
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#8/31/20
+#9/1/20
 
 # &gws_rd=cr -> implement optional redirects
 
@@ -27,8 +27,10 @@ class GoogleMaps:
    the result of the query. It also resolves the new redirected Google Maps URL.
 
    :param q: A search string that's assigned to the '?q=' URL argument.
+   :param fields: Specify which data points to scrape.
    :param session: An HTMLSession object from the requests_html Python package.
    :type q: str
+   :type fields: list
    :type session: requests_html.HTMLSession
 
    :returns: A single GoogleMaps object already containing the queried place's url, title, and lat/long coordinates
@@ -213,7 +215,7 @@ class GoogleMapsResults:
             self._place_names = self._get_place_names(self.oq) or [self.__n_a]
             if self._place_names[0] != self.__n_a:
                for name in self._place_names:
-                  result = GoogleMaps(name)
+                  result = GoogleMaps(name, session=self.__sesh)
                   time.sleep(self.delay)
                   self.__results.append(result)
                   if log:
@@ -237,10 +239,14 @@ class GoogleMapsResults:
       q = self.__sq + quote_plus(query); names = []
       resp = self.__sesh.get(q); resp.html.render()
       next_page = "&#rlfi=start:"; Q = quote_plus(query).replace('+','\+')
-      href = re.search(fr"/search\?q={Q}&amp;npsic.+?\"",
-                            resp.html.html)
+      expr = fr"/search\?q={Q}&amp;npsic.+?\""
+      href = re.search(expr, resp.html.html)
+      if not href:
+          Q = query.replace(' ','\+')
+          expr = fr"/search\?q={Q}&amp;npsic.+?\""
+          href = re.search(expr, resp.html.html)
       self.url = list_link = "https://www.google.com" +\
-                 href.group().replace("&amp;", '&')
+                 href.group().replace("&amp;", '&').strip('"')
       if self.__pn > 1:
          idx = 20*(int(self.__pn)-1)
          next_page += str(idx)
@@ -269,6 +275,7 @@ def maps_search(q: str, page_num: int=1, delay: int=10, url_args: str='',
    :param delay: The number specifying the time in seconds to wait after each request.
    :param log: If True, prints the found results as they occur.
    :param single: If True, only returns the single GoogleMaps object directly.
+   :param fields: If ``single=True``, specify which data points to scrape.
 
    .. warning:: delay cannot be less than 5 seconds, otherwise bot will be detected and blocked for too many requests
 
@@ -282,4 +289,4 @@ def maps_search(q: str, page_num: int=1, delay: int=10, url_args: str='',
       q = unquote_plus(q)
    if delay < 5:
       delay = 5
-   return GoogleMapsResults(q, page_num, delay, log)
+   return GoogleMapsResults(q, page_num=page_num, delay=delay, log=log)
