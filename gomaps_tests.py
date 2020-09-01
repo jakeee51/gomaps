@@ -3,8 +3,8 @@ import gomaps, time
 if __name__ == "__main__":
    t0 = time.process_time()
 
-   results = gomaps.maps_search("Tops Diner, NJ", single=True)
-   values = results.get_values()
+   results = gomaps.maps_search("Tops Diner, Newark NJ")
+   values = results[0].get_values()
    for val in values.values():
       print(val)
       assert val != None or val != {}, "Gomaps results missing values!"
