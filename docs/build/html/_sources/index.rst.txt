@@ -10,8 +10,8 @@
    :target: https://pypi.org/project/gomaps
    :alt: latest release
 
-.. image:: https://pepy.tech/badge/gomaps/month
-   :target: https://pepy.tech/project/gomaps/month
+.. image:: https://pepy.tech/badge/gomaps
+   :target: https://pepy.tech/project/gomaps
 
 .. image:: https://readthedocs.org/projects/gomaps/badge/
 

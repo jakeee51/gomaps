@@ -5,9 +5,9 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "gomaps",
-    version = "0.2.7",
+    version = "0.2.8",
     author = "David J. Morfe",
-    author_email = "jakemorfe@gmail.com",
+    author_email = "morphetech@gmail.com",
     license = "MIT",
     description = "A Google Maps web scraper that gets place data based on a search",
     long_description=long_description,

@@ -2,8 +2,8 @@
   <img src="https://img.shields.io/pypi/v/gomaps.svg" alt="latest release" />
 </a>
 
-<a href="https://pepy.tech/project/gomaps/month">
-  <img src="https://pepy.tech/badge/gomaps/month" />
+<a href="https://pepy.tech/project/gomaps">
+  <img src="https://pepy.tech/badge/gomaps" />
 </a>
 
 <a href="https://gomaps.readthedocs.io/en/latest/">
@@ -35,7 +35,7 @@ For more information about Google's popular times data, refer to this support po
 <a href="https://gomaps.readthedocs.io/en/latest/">https://gomaps.readthedocs.io/en/latest/</a>
 
 <h2><b>Quickstart:</b></h2>
-To start, import the functions from the `gomaps` package.
+To start, import the functions from the *gomaps* package.
 
 ```python
 from gomaps import maps_search
