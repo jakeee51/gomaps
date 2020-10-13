@@ -5,7 +5,7 @@ Application Name: gmapss (Google Maps Search)
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#9/1/20
+#10/13/20
 
 # &gws_rd=cr -> implement optional redirects
 

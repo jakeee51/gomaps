@@ -5,7 +5,7 @@ Application Name: gomaps.utils
 Functionality Purpose: Provides utility functions with some also useful for external consumption
 Version: Beta
 '''
-#8/29/20
+#10/13/20
 
 import requests, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -233,7 +233,7 @@ def get_open_hours(data: str) -> dict: # parses open hours
             current = f"{current.group(1)} - {current.group(3)}"
          return (hours.group(), current)
       except (TypeError, AttributeError):
-         return None
+         return (None, None)
    else:
       html = __direct_google_search(data)
       return get_open_hours(html)
