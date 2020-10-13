@@ -119,7 +119,8 @@ class GoogleMaps:
          hours_results = get_open_hours(resp.html.html)
          if hours_results[1] != None:
             self.open_hours["Currently"] = hours_results[1]
-         self.__set_hours(hours_results[0])
+         if hours_results[0] != None:
+             self.__set_hours(hours_results[0])
          ptimes = get_popular_times(resp.html.html)
          if ptimes != None:
             self.__set_pop_times(ptimes)
