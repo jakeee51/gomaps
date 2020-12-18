@@ -96,17 +96,20 @@ class GoogleMaps:
                self.__dict__[attr] = None
    def __set_url(self, url_exists: re): # set the url, title & coords attributes
       if url_exists:
-         prefix = re.sub(r"\?q=", "/place/", self.__mq).replace('+', "\+")
-         path = re.search(fr'{prefix}.+?/data.+?\\"', self.__resp.text).group()
-         path = re.sub(r"\\\\u003d", '=', path)
-         coords = re.search(r"@-?\d\d?\.\d{4,8},-?\d\d?\.\d{4,8}",
-                            url_exists.group()).group()
-         self.coords = self.coordinates = tuple(coords.strip('@').split(','))
-         path = re.sub(r"/data", f"/{coords},17z/data", path)
-         self.url = path[:-11] + "!8m2!3d" + re.sub(r",", "!4d", coords.strip('@'))
-         title = re.search(r"(?<=https://www.google.com/maps/place/)\w+.*?/@",
-                                self.url).group().strip("/@")
-         self.title = unquote_plus(title)
+         try:
+            prefix = re.sub(r"\?q=", "/place/", self.__mq).replace('+', "\+")
+            path = re.search(fr'{prefix}.+?/data.+?\\"', self.__resp.text).group()
+            path = re.sub(r"\\\\u003d", '=', path)
+            coords = re.search(r"@-?\d\d?\.\d{4,8},-?\d\d?\.\d{4,8}",
+                               url_exists.group()).group()
+            self.coords = self.coordinates = tuple(coords.strip('@').split(','))
+            path = re.sub(r"/data", f"/{coords},17z/data", path)
+            self.url = path[:-11] + "!8m2!3d" + re.sub(r",", "!4d", coords.strip('@'))
+            title = re.search(r"(?<=https://www.google.com/maps/place/)\w+.*?/@",
+                                    self.url).group().strip("/@")
+            self.title = unquote_plus(title)
+         except AttributeError:
+            pass
    def __set_attrs(self, query: str, fields: list=[]):
       resp = self.__sesh.get(self.__sq + quote_plus(query)); resp.html.render()
       if self.__fields_valid and len(fields) != 0:
