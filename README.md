@@ -69,4 +69,4 @@ results[0].get_values() # Populates the object's attributes & returns a dictiona
 ```
 
 # Copyright
-Copyright (c) 2020 The Python Packaging Authority. Released under the MIT License.
+Copyright (c) 2021 The Python Packaging Authority. Released under the MIT License.

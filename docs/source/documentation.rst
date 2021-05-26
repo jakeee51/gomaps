@@ -224,6 +224,6 @@ Main Functions
 
    Searches for the Google Maps popular times (if any) of a location
 
-   :param data: A place name
+   :param data: A place name, address, lat/long coordinates or HTML
 
-   :returns: Returns a string of the location's popular times
+   :returns: Returns a list of the location's popular times

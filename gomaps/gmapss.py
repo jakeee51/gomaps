@@ -5,7 +5,7 @@ Application Name: gmapss (Google Maps Search)
 Functionality Purpose: Acquire google maps data of a place based on query
 Version: Beta
 '''
-#10/13/20
+#5/25/20
 
 # &gws_rd=cr -> implement optional redirects
 
@@ -124,6 +124,8 @@ class GoogleMaps:
             self.open_hours["Currently"] = hours_results[1]
          if hours_results[0] != None:
              self.__set_hours(hours_results[0])
+         with open("TEST.html", 'w', encoding="utf-8") as f:
+            f.write(resp.html.html)
          ptimes = get_popular_times(resp.html.html)
          if ptimes != None:
             self.__set_pop_times(ptimes)
@@ -150,8 +152,7 @@ class GoogleMaps:
       days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       i = 0
       for day in ptimes:
-         parse = re.sub(r"(?<=]).+", '', day).strip("[]") + ','
-         prep = parse.replace(',', "{},")
+         prep = day.replace(',', "{},")
          times = prep.format(*self.__pop_hours()).strip(',')
          self.popular_times[days[i]] = times.split(','); i += 1
    def __set_values(self, fields: list=[]):

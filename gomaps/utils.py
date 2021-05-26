@@ -5,7 +5,7 @@ Application Name: gomaps.utils
 Functionality Purpose: Provides utility functions with some also useful for external consumption
 Version: Beta
 '''
-#10/13/20
+#5/25/20
 
 import requests, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -42,6 +42,26 @@ def __is_address(location: str) -> str:
       if addr == "OTHER":
          return False
    return addr
+
+def __prep_pop_times(pop_times: list) -> list:
+   '''Formats the values of the busy percentages per hour.
+
+   :param pop_times: A list of all the popular times values for current week
+
+   :returns: A popular times list of strings formatted as
+            `[
+               [values_per_hour], [values_per_hour], [values_per_hour],
+               [values_per_hour], [values_per_hour], [values_per_hour],
+               [values_per_hour]
+            ]`
+            Each list representing a day of the week (Monday - Sunday)'''
+   ret = []; c = 0; day = ''
+   for i in pop_times:
+      if c >= 18:
+         ret.append(day)
+         day = ''; c = 0
+      day += re.sub(r"\[\d+,\[", '', i) + ','; c += 1
+   return ret
 
 def geocoder(location, reverse: bool=False): # gets geographical lat/long coordinates or reverse geocodes
    '''Searches for the lattitude & longitude coordinates of a location.
@@ -238,19 +258,18 @@ def get_open_hours(data: str) -> dict: # parses open hours
       html = __direct_google_search(data)
       return get_open_hours(html)
 
-def get_popular_times(data: str) -> dict: # parses popular times
+def get_popular_times(data: str) -> list: # parses popular times
    '''Searches for the Google Maps popular times (if any) of a location
 
-   :param data: A place name, address or lat/long coordinates
+   :param data: A place name, address, lat/long coordinates or HTML
 
-   :returns: Returns a string of the location's popular times'''
+   :returns: Returns a list of the location's popular times'''
    if len(data) > 128:
       try:
-         pop_times = re.findall(r"\[\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},"\
-                                "\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3},\d{1,3}\].+?(?:No )?wait",
-                                data)
+         pop_times = re.findall(r"\[\d{1,2},\[\d{1,2}", data)
          if pop_times:
-            return pop_times
+            ret = __prep_pop_times(pop_times)
+            return ret
       except (TypeError, AttributeError):
          return None
    else:

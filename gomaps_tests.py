@@ -8,7 +8,7 @@ if __name__ == "__main__":
    values = results[0].get_values()
    for val in values.values():
       print(val)
-      assert val != None or val != {}, "Gomaps results missing values!"
+      assert val != None and val != {}, "Gomaps results missing values!"
    results = gomaps.maps_search("Tops Diner, NJ", fields=["coords", "rating"])
    print(results.values)
    assert len(results.values) == 2, "Gomaps fields feature failed!"

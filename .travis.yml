@@ -9,18 +9,18 @@ install:
   - pip install git+https://github.com/jakeee51/gomaps
 script:
   - python3 gomaps_tests.py
-# jobs:
-#   include:
-#     - stage: deploy
-#       python: 3.8
-#       install: 
-#         - pip install requests_html pyppdf GeoLiberator
-#         - pip install git+https://github.com/jakeee51/gomaps
-#       script: skip
-#       before_deploy:
-#         - python3 poppypib.py
-#       deploy:
-#         provider: pypi
-#         username: "__token__"
-#         password: $PYPI_PASSWORD
-#         edge: true
+jobs:
+  include:
+    - stage: deploy
+      python: 3.8
+      install: 
+        - pip install requests_html pyppdf GeoLiberator
+        - pip install git+https://github.com/jakeee51/gomaps
+      script: skip
+      before_deploy:
+        - python3 poppypib.py
+      deploy:
+        provider: pypi
+        username: "__token__"
+        password: $PYPI_PASSWORD
+        edge: true

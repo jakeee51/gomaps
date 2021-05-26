@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('C:/Users/DaviMabi/Documents/GitHub/gomaps/gomaps'))
+sys.path.insert(0, os.path.abspath('C:/Users/jakem/Documents/GitHub/gomaps/gomaps'))
 
 
 # -- Project information -----------------------------------------------------
