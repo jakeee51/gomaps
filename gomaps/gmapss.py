@@ -124,8 +124,6 @@ class GoogleMaps:
             self.open_hours["Currently"] = hours_results[1]
          if hours_results[0] != None:
              self.__set_hours(hours_results[0])
-         with open("TEST.html", 'w', encoding="utf-8") as f:
-            f.write(resp.html.html)
          ptimes = get_popular_times(resp.html.html)
          if ptimes != None:
             self.__set_pop_times(ptimes)
@@ -135,6 +133,9 @@ class GoogleMaps:
       parsed = re.sub(r"(<td)? class=\"\w+\">", '', table)
       dow = re.sub(r"</td><td>", ' ', parsed).split("</td></tr><tr>")
       for row in dow:
+         if len(row) > 24:
+            row = re.sub(r"<div>.+?</div>", '', row)
+         row = re.sub(r"<div><span", '', row)
          day = row.split(' ')[0]
          open_times = row.split(' ')[1]
          self.open_hours["Hours"][day] = open_times
