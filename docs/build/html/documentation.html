@@ -4,15 +4,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>API Documentation &#8212; gomaps 0.1.0 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="QuickStart" href="quickstart.html" />
@@ -32,15 +32,15 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="api-documentation">
+  <section id="api-documentation">
 <h1><strong>API Documentation</strong><a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="main-classes">
+<section id="main-classes">
 <h2>Main Classes<a class="headerlink" href="#main-classes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="googlemaps-class">
+<section id="googlemaps-class">
 <h3>GoogleMaps class<a class="headerlink" href="#googlemaps-class" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="gomaps.GoogleMaps">
-<em class="property">class </em><code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">GoogleMaps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fields</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">session</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMaps" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">GoogleMaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMaps" title="Permalink to this definition">¶</a></dt>
 <dd><p>A response object from a Google Maps request</p>
 <p>This class is initialized with a search string (query) and returns
 the result of the query. It also resolves the new redirected Google Maps URL.</p>
@@ -57,86 +57,86 @@ the result of the query. It also resolves the new redirected Google Maps URL.</p
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.oq">
-<code class="sig-name descname">oq</code><a class="headerlink" href="#gomaps.GoogleMaps.oq" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.oq">
+<span class="sig-name descname"><span class="pre">oq</span></span><a class="headerlink" href="#gomaps.GoogleMaps.oq" title="Permalink to this definition">¶</a></dt>
 <dd><p>The original query string</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.query">
-<code class="sig-name descname">query</code><a class="headerlink" href="#gomaps.GoogleMaps.query" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.query">
+<span class="sig-name descname"><span class="pre">query</span></span><a class="headerlink" href="#gomaps.GoogleMaps.query" title="Permalink to this definition">¶</a></dt>
 <dd><p>The URL string that a request was sent to. (example: <code class="docutils literal notranslate"><span class="pre">'https://www.google.com/maps?q=Tops+Diner'</span></code>)</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.title">
-<code class="sig-name descname">title</code><a class="headerlink" href="#gomaps.GoogleMaps.title" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#gomaps.GoogleMaps.title" title="Permalink to this definition">¶</a></dt>
 <dd><p>The title or name of the place found <em>(available upon initialization)</em></p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.url">
-<code class="sig-name descname">url</code><a class="headerlink" href="#gomaps.GoogleMaps.url" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#gomaps.GoogleMaps.url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The newly redirected URL of the place on Google Maps <em>(available upon initialization)</em></p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.coordinates">
-<code class="sig-name descname">coordinates</code><a class="headerlink" href="#gomaps.GoogleMaps.coordinates" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.coordinates">
+<span class="sig-name descname"><span class="pre">coordinates</span></span><a class="headerlink" href="#gomaps.GoogleMaps.coordinates" title="Permalink to this definition">¶</a></dt>
 <dd><p>The lattitude and longitude coordinates of the place store in tuple. (ex: <code class="docutils literal notranslate"><span class="pre">('40.7506065',</span> <span class="pre">'-74.1639023')</span></code> <em>(available upon initialization)</em></p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.coords">
-<code class="sig-name descname">coords</code><a class="headerlink" href="#gomaps.GoogleMaps.coords" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.coords">
+<span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#gomaps.GoogleMaps.coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alternative for referencing <em>‘coordinates’</em> attribute</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.address">
-<code class="sig-name descname">address</code><a class="headerlink" href="#gomaps.GoogleMaps.address" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.address">
+<span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="#gomaps.GoogleMaps.address" title="Permalink to this definition">¶</a></dt>
 <dd><p>The full address of the place</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.phone_number">
-<code class="sig-name descname">phone_number</code><a class="headerlink" href="#gomaps.GoogleMaps.phone_number" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.phone_number">
+<span class="sig-name descname"><span class="pre">phone_number</span></span><a class="headerlink" href="#gomaps.GoogleMaps.phone_number" title="Permalink to this definition">¶</a></dt>
 <dd><p>The phone number (otherwise returns None)</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.website">
-<code class="sig-name descname">website</code><a class="headerlink" href="#gomaps.GoogleMaps.website" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.website">
+<span class="sig-name descname"><span class="pre">website</span></span><a class="headerlink" href="#gomaps.GoogleMaps.website" title="Permalink to this definition">¶</a></dt>
 <dd><p>The website (otherwise returns None)</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.rating">
-<code class="sig-name descname">rating</code><a class="headerlink" href="#gomaps.GoogleMaps.rating" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.rating">
+<span class="sig-name descname"><span class="pre">rating</span></span><a class="headerlink" href="#gomaps.GoogleMaps.rating" title="Permalink to this definition">¶</a></dt>
 <dd><p>The star rating ranging from 0.0-5.0 (otherwise returns None)</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.open_hours">
-<code class="sig-name descname">open_hours</code><a class="headerlink" href="#gomaps.GoogleMaps.open_hours" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.open_hours">
+<span class="sig-name descname"><span class="pre">open_hours</span></span><a class="headerlink" href="#gomaps.GoogleMaps.open_hours" title="Permalink to this definition">¶</a></dt>
 <dd><p>The open hours of operation of the place. Returns a dictionary.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.popular_times">
-<code class="sig-name descname">popular_times</code><a class="headerlink" href="#gomaps.GoogleMaps.popular_times" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.popular_times">
+<span class="sig-name descname"><span class="pre">popular_times</span></span><a class="headerlink" href="#gomaps.GoogleMaps.popular_times" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Google Maps <a class="reference external" href="https://support.google.com/business/answer/6263531?hl=en">Popular Times</a> data for 7 days of the week. Returns a dictionary.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMaps.values">
-<code class="sig-name descname">values</code><a class="headerlink" href="#gomaps.GoogleMaps.values" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.values">
+<span class="sig-name descname"><span class="pre">values</span></span><a class="headerlink" href="#gomaps.GoogleMaps.values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary with all the attributes of the place listed above. (Note: Only populated after <code class="docutils literal notranslate"><span class="pre">get_values()</span></code> member function is called)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="gomaps.GoogleMaps.get_values">
-<code class="sig-name descname">get_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMaps.get_values" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMaps.get_values">
+<span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMaps.get_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>This sends an additional request, populates the rest of the attributes, then returns a Python dictionary of all the attributes.</p>
 </dd></dl>
 
@@ -146,12 +146,12 @@ the result of the query. It also resolves the new redirected Google Maps URL.</p
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="googlemapsresults-class">
+</section>
+<section id="googlemapsresults-class">
 <h3>GoogleMapsResults class<a class="headerlink" href="#googlemapsresults-class" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="gomaps.GoogleMapsResults">
-<em class="property">class </em><code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">GoogleMapsResults</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">page_num</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">log</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMapsResults" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMapsResults">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">GoogleMapsResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMapsResults" title="Permalink to this definition">¶</a></dt>
 <dd><p>A response object containing GoogleMaps objects as a result of the request</p>
 <p>This class is initialized with a search string (query) and returns
 the result(s) within a list-like object.</p>
@@ -169,44 +169,44 @@ the result(s) within a list-like object.</p>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="gomaps.GoogleMapsResults.oq">
-<code class="sig-name descname">oq</code><a class="headerlink" href="#gomaps.GoogleMapsResults.oq" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMapsResults.oq">
+<span class="sig-name descname"><span class="pre">oq</span></span><a class="headerlink" href="#gomaps.GoogleMapsResults.oq" title="Permalink to this definition">¶</a></dt>
 <dd><p>The original query string</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMapsResults.query">
-<code class="sig-name descname">query</code><a class="headerlink" href="#gomaps.GoogleMapsResults.query" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMapsResults.query">
+<span class="sig-name descname"><span class="pre">query</span></span><a class="headerlink" href="#gomaps.GoogleMapsResults.query" title="Permalink to this definition">¶</a></dt>
 <dd><p>The URL string that a request was sent to. (example: <code class="docutils literal notranslate"><span class="pre">'https://www.google.com/search?q=Tops+Diner'</span></code>)</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMapsResults.url">
-<code class="sig-name descname">url</code><a class="headerlink" href="#gomaps.GoogleMapsResults.url" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMapsResults.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#gomaps.GoogleMapsResults.url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The newly redirected URL of the place on Google Maps <em>(available upon initialization as long as there’s only a single result)</em></p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="gomaps.GoogleMapsResults.delay">
-<code class="sig-name descname">delay</code><a class="headerlink" href="#gomaps.GoogleMapsResults.delay" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMapsResults.delay">
+<span class="sig-name descname"><span class="pre">delay</span></span><a class="headerlink" href="#gomaps.GoogleMapsResults.delay" title="Permalink to this definition">¶</a></dt>
 <dd><p>The number specifying the time in seconds to wait after each request.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="gomaps.GoogleMapsResults.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMapsResults.list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.GoogleMapsResults.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.GoogleMapsResults.list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the GoogleMapsResults object as an actual Python list</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="main-functions">
+</section>
+</section>
+<section id="main-functions">
 <h2>Main Functions<a class="headerlink" href="#main-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="gomaps.maps_search">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">maps_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">page_num</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">log</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">single</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fields</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.maps_search" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.maps_search">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">maps_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.maps_search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for a place(s) on Google Maps &amp; returns the results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -244,8 +244,8 @@ the result(s) within a list-like object.</p>
 <p>The following functions are overloaded. That being said the functions with <code class="docutils literal notranslate"><span class="pre">data</span></code> as a parameter can take an HTML string as input for <code class="docutils literal notranslate"><span class="pre">data</span></code> as well as a normal query string.</p>
 </div>
 <dl class="py function">
-<dt id="gomaps.geocoder">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">geocoder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">location</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">reverse</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.geocoder" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.geocoder">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">geocoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.geocoder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the lattitude &amp; longitude coordinates of a location.
 Reverse geocoding searches for the location of coordinates</p>
 <dl class="field-list simple">
@@ -275,8 +275,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_url">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_url" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_url">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for full Google Maps URL of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -289,8 +289,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_title">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_title" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_title">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the title or name of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -303,8 +303,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_address">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_address</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">validate</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_address" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_address">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_address" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the full address of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -320,8 +320,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_website">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_website</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_website" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_website">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_website</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_website" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the website (if any) of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -334,8 +334,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_phone_number">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_phone_number</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_phone_number" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_phone_number">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_phone_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_phone_number" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the phone number (if any) of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -348,8 +348,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_rating">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_rating</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_rating" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_rating">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_rating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_rating" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the rating (if any) of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -360,8 +360,8 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd>
 </dl>
 <dl class="py function">
-<dt id="gomaps.get_open_hours">
-<code class="sig-name descname">get_open_hours</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_open_hours" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_open_hours">
+<span class="sig-name descname"><span class="pre">get_open_hours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_open_hours" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Searches for the open hours (if any) of a location</p>
@@ -376,21 +376,21 @@ Reverse geocoding searches for the location of coordinates</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="gomaps.get_popular_times">
-<code class="sig-prename descclassname">gomaps.</code><code class="sig-name descname">get_popular_times</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_popular_times" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gomaps.get_popular_times">
+<span class="sig-prename descclassname"><span class="pre">gomaps.</span></span><span class="sig-name descname"><span class="pre">get_popular_times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gomaps.get_popular_times" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches for the Google Maps popular times (if any) of a location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> – A place name</p>
+<dd class="field-odd"><p><strong>data</strong> – A place name, address, lat/long coordinates or HTML</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a string of the location’s popular times</p>
+<dd class="field-even"><p>Returns a list of the location’s popular times</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -452,7 +452,7 @@ Reverse geocoding searches for the location of coordinates</p>
       &copy;2020, David J. Morfe.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
