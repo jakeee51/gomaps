@@ -4,6 +4,7 @@ if __name__ == "__main__":
    t0 = time.process_time()
 
    results = gomaps.maps_search("Tops Diner, NJ")
+   print(results)
    values = results[0].get_values()
    for val in values.values():
       print(val)
