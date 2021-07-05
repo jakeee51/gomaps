@@ -5,7 +5,7 @@ with open("README.md", 'r') as f:
 
 setuptools.setup(
     name = "gomaps",
-    version = "0.3.1",
+    version = "0.3.2",
     author = "David J. Morfe",
     author_email = "morphetech@gmail.com",
     license = "MIT",

@@ -111,7 +111,7 @@ class GoogleMaps:
          except AttributeError:
             pass
    def __set_attrs(self, query: str, fields: list=[]):
-      resp = self.__sesh.get(self.__sq + quote_plus(query)); resp.html.render()
+      resp = self.__sesh.get(self.__sq + quote_plus(query)); resp.html.render(timeout=30)
       if self.__fields_valid and len(fields) != 0:
          attrs_switch(self, resp.html.html, fields)
       else:
@@ -251,6 +251,8 @@ class GoogleMapsResults:
           Q = query.replace(' ','\+')
           expr = fr"/search\?q={Q}&amp;npsic.+?\""
           href = re.search(expr, resp.html.html)
+          if not href:
+              return None
       self.url = list_link = "https://www.google.com" +\
                  href.group().replace("&amp;", '&').strip('"')
       if self.__pn > 1:
