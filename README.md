@@ -3,7 +3,7 @@
 </a>
 
 <a href="https://pepy.tech/project/gomaps">
-  <img src="https://pepy.tech/badge/gomaps" />
+  <img src="https://static.pepy.tech/badge/gomaps" />
 </a>
 
 <a href="https://gomaps.readthedocs.io/en/latest/">
