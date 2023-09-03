@@ -10,9 +10,7 @@
   <img src="https://readthedocs.org/projects/gomaps/badge/" />
 </a>
 
-<a href="https://travis-ci.com/github/jakeee51/gomaps">
-  <img src="https://travis-ci.com/jakeee51/gomaps.svg?branch=master&status=passed" />
-</a>
+[![Upload Python Package](https://github.com/jakeee51/gomaps/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jakeee51/gomaps/actions/workflows/python-publish.yml)
 
 # The-Gomaps-Python-Package
 
