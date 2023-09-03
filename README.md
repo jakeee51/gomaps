@@ -9,7 +9,6 @@
 <a href="https://gomaps.readthedocs.io/en/latest/">
   <img src="https://readthedocs.org/projects/gomaps/badge/" />
 </a>
-
 [![Upload Python Package](https://github.com/jakeee51/gomaps/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jakeee51/gomaps/actions/workflows/python-publish.yml)
 
 # The-Gomaps-Python-Package
