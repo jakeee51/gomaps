@@ -5,7 +5,7 @@ Application Name: gomaps.utils
 Functionality Purpose: Provides utility functions with some also useful for external consumption
 Version: Beta
 '''
-#5/25/20
+# 9/2/23
 
 import requests, time, os, sys, re
 import pyppdf.patch_pyppeteer
@@ -68,7 +68,7 @@ def geocoder(location, reverse: bool=False): # gets geographical lat/long coordi
    Reverse geocoding searches for the location of coordinates
 
    :param location: A place name, address or lat/long coordinates
-   :param reverse: If True, uses reverse geocoder & will return string
+   :param reverse: If True, uses reverse geocoder & will return address string
 
    .. admonition:: Note
 
@@ -87,6 +87,7 @@ def geocoder(location, reverse: bool=False): # gets geographical lat/long coordi
       except (TypeError, AttributeError):
          return None
    else:
+      print("WARNING: Feature deprecated and will likely no longer work.")
       try:
          location = location.replace(' ', '').split(',')
       except (TypeError, AttributeError):
@@ -95,9 +96,9 @@ def geocoder(location, reverse: bool=False): # gets geographical lat/long coordi
              "Argument 'location' must be tuple, list, or string seprated by comma!"
       q = str(location).strip("()")
       html = __direct_google_maps(q)
-      got = re.search(r'\[\[\\"400.+?\\"\]\\n\]\\n\]\\n,.+?°', html)
+      got = re.search(r"· .+' itemprop", html)
       if got:
-         addr = re.sub(r'\\"\].+$', '', got.group()).strip('[\\"')
+         addr = re.sub(r"' itemprop", '', got.group()).strip('· ')
          return addr
 
 def get_url(data: str) -> str: # parses new url
