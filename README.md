@@ -10,8 +10,8 @@
   <img src="https://readthedocs.org/projects/gomaps/badge/" />
 </a>
 
-<a href="https://travis-ci.org/github/jakeee51/gomaps">
-  <img src="https://travis-ci.org/jakeee51/gomaps.svg?branch=master&status=passed" />
+<a href="https://travis-ci.com/github/jakeee51/gomaps">
+  <img src="https://travis-ci.com/jakeee51/gomaps.svg?branch=master&status=passed" />
 </a>
 
 # The-Gomaps-Python-Package
